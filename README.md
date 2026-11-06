@@ -25,12 +25,13 @@ Each folder under `infra/` is a separate Terraform root ("stack") with its own s
 | Path | What it is |
 |---|---|
 | `data_references/` | Read-only lookups for account, zone, DNS record, ruleset, and list IDs (all zones, no setup). See its [README](data_references/README.md). |
-| `docs/` | Requirements ([requirements.md](docs/requirements.md)), the draft tunnel topology ([topology.md](docs/topology.md)), and the origin lockdown proposal ([origin-lockdown.md](docs/origin-lockdown.md)). |
+| `docs/` | Comprehensive technical reports ([Application Services](docs/Application_Services_Report.md) / [PDF](docs/Application_Services_Report.pdf) and [Zero Trust Services](docs/Zero_Trust_Services_Report.md) / [PDF](docs/Zero_Trust_Services_Report.pdf)), requirements ([requirements.md](docs/requirements.md)), topology ([topology.md](docs/topology.md)), and origin lockdown proposal ([origin-lockdown.md](docs/origin-lockdown.md)). |
 | `infra/bootstrap/` | Creates the CI API token and its permissions. Run by hand. See its [README](infra/bootstrap/README.md). |
 | `infra/common/` | Shared, account-level configuration, and the `cambrera.net` zone and its DNS records. |
 | `infra/www_svc/` | The app's CDN configuration: calls `tf_cdn` (`www.cambrera.net` proxied to `www-origin.cambrera.net`; `cambrera.net` and `http://` 301 to `https://www.cambrera.net`). |
 | `infra/tunnel_svc/` | Cloudflare Tunnel for `tunnel.cambrera.net` (connector: `cloudflared` next to the www app) and its token in SSM. |
-| `infra/zero_trust/` | Zero Trust: login methods (Google, One-time PIN), and next Access for `tunnel.cambrera.net/secure`. |
+| `infra/flag_svc/` | Private R2 bucket for country flags assets and Worker state. |
+| `infra/zero_trust/` | Zero Trust (Exercise 2): IdP groups (`Testers`, `SaaS Users`), Self-Hosted app (`tunnel.cambrera.net/testers*`), SaaS app (SAML 2.0 with Cloudflare as IdP), WARP device enrollment policy, and Gateway DNS & HTTP filtering rules calling `tf_zerotrust`. |
 | `tf_dns/` | Module: a zone and its DNS records. Used by `infra/common`. |
 | `tf_cdn/` | Module: CDN configuration for proxied hostnames. So far the orange proxy (proxied CNAMEs), Always Use HTTPS, Full (strict), minimum TLS 1.3, and a canonical-host redirect. Used by `infra/www_svc`. |
 | `infra_aws/` | AWS: the origin (`http-echo` on Elastic Beanstalk behind an ALB, HTTPS only on 443) and its ACM certificate for `www-origin.cambrera.net`. See its [README](infra_aws/README.md). |
