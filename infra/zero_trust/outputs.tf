@@ -32,3 +32,9 @@ output "gateway_policies" {
   description = "Configured Gateway policies from tf_zerotrust module"
   value       = module.gateway.gateway_policies
 }
+
+output "warp_device_enrollment_app_id" {
+  description = "ID of the WARP Device Enrollment Access Application"
+  value       = cloudflare_zero_trust_access_application.warp_device_enrollment.id
+}
+
