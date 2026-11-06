@@ -1,0 +1,13 @@
+{
+  "name": "cambrera-flag-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker serving identity info on /secure and country flags from private R2",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "pwsh -File ./deploy.ps1 || bash ./deploy.sh || wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.158.0"
+  }
+}

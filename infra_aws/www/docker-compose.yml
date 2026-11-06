@@ -1,0 +1,15 @@
+# The www app and its Cloudflare Tunnel connector, on the same instance.
+services:
+  www:
+    image: mendhak/http-https-echo:43
+    ports:
+      - "80:8080"   # the ALB (Beanstalk runs no proxy with Compose)
+      - "8080:8080" # cloudflared, on localhost
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.7
+    command: tunnel --no-autoupdate run # TUNNEL_TOKEN from .env (Beanstalk secret, from SSM)
+    network_mode: host # so http://localhost:8080 is the www container
+    env_file: .env
+    restart: unless-stopped

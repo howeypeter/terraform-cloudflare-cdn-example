@@ -1,0 +1,42 @@
+# Sorted alphabetically (C locale). Negation rules must stay at the bottom so they override earlier patterns.
+#
+# Secrets: .env holds CLOUDFLARE_API_TOKEN; backend.hcl holds backend credentials if you use one; *.tfvars hold account IDs and Logpush settings; state can contain
+# secrets; *.key / *.pem cover Origin CA certificates and keys; .cloudflared/ holds Tunnel credentials;
+# .dev.vars holds Workers local secrets (if you add a Worker, e.g. for CORS preflights).
+
+**/.git/
+**/.terraform.lock.hcl
+**/.terraform/
+*.key
+*.pem
+*.tfplan
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*_override.tf
+*_override.tf.json
+.DS_Store
+.claude/
+.cloudflared/
+.dev.vars
+.env
+.env.*
+.envrc
+.idea/
+.project
+.terraform.tfstate.lock.info
+.terraformrc
+.vscode/
+.wrangler/
+Thumbs.db
+backend.hcl
+crash.*.log
+crash.log
+override.tf
+override.tf.json
+terraform.rc
+tfplan
+
+# Re-include the placeholder credentials file
+!.env.example

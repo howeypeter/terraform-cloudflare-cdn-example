@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cambrera-flag-worker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  "account_id": "eedd707b4e658a58dff3f7d2933f5bb0",
+  "routes": [
+    {
+      "pattern": "tunnel.cambrera.net/secure*",
+      "zone_name": "cambrera.net"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "FLAGS_BUCKET",
+      "bucket_name": "cambrera-prod-country-flags"
+    }
+  ],
+  "vars": {
+    "BUILD_ID": "build-20261106-1925"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
