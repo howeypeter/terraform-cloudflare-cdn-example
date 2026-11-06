@@ -24,7 +24,7 @@ module "gateway" {
       action      = "block"
       filters     = ["http"]
       precedence  = 200
-      traffic     = "any(http.request.uri.content_category[*] in {7 92}) and not (http.request.host in {\"netflix.com\" \"www.netflix.com\" \"youtube.com\" \"www.youtube.com\"})"
+      traffic     = "any(http.request.uri.content_category[*] in {7 92}) and not (http.request.host in {\"youtube.com\" \"*.youtube.com\" \"netflix.com\" \"*.netflix.com\" \"*.googlevideo.com\"})"
       enabled     = true
     }
   }
