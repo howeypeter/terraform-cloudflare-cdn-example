@@ -24,14 +24,8 @@ module "gateway" {
       action      = "block"
       filters     = ["http"]
       precedence  = 200
-      traffic     = "any(http.request.uri.content_category[*] in {7 92}) and not (http.request.host in {\"youtube.com\" \"*.youtube.com\" \"netflix.com\" \"*.netflix.com\" \"*.googlevideo.com\"})"
+      traffic     = "any(http.request.uri.content_category[*] in {7 92}) and not(http.request.host in {\"youtube.com\" \"*.youtube.com\" \"netflix.com\" \"*.netflix.com\" \"*.googlevideo.com\"})"
       enabled     = true
     }
   }
-}
-
-# Safe state migration to prevent recreation of already applied policy
-moved {
-  from = cloudflare_zero_trust_gateway_policy.block_malware_anonymizers
-  to   = module.gateway.cloudflare_zero_trust_gateway_policy.policy["block_malware_anonymizers"]
 }

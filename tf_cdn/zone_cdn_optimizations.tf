@@ -19,32 +19,6 @@ resource "cloudflare_zone_setting" "optimization" {
   value      = each.value
 }
 
-# Safe state migrations to prevent resource recreation/downtime
-moved {
-  from = cloudflare_zone_setting.always_use_https
-  to   = cloudflare_zone_setting.optimization["always_use_https"]
-}
-
-moved {
-  from = cloudflare_zone_setting.ssl
-  to   = cloudflare_zone_setting.optimization["ssl"]
-}
-
-moved {
-  from = cloudflare_zone_setting.min_tls_version
-  to   = cloudflare_zone_setting.optimization["min_tls_version"]
-}
-
-moved {
-  from = cloudflare_zone_setting.tls_1_3
-  to   = cloudflare_zone_setting.optimization["tls_1_3"]
-}
-
-moved {
-  from = cloudflare_zone_setting.settings
-  to   = cloudflare_zone_setting.optimization
-}
-
 # Tiered Caching: consolidates edge cache misses across regional Upper-Tier super-PoPs,
 # reducing origin requests by 90%+ and protecting infrequently requested assets from LRU eviction.
 resource "cloudflare_tiered_cache" "tiered_cache" {
