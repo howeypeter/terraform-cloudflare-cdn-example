@@ -7,9 +7,9 @@ set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # 1. Load credentials from flag_svc .env if available
-if [[ -f "$DIR/../infra/flag_svc/.env" ]]; then
+if [[ -f "$DIR/../../infra/flag_svc/.env" ]]; then
     set -a
-    source <(tr -d '\r' < "$DIR/../infra/flag_svc/.env")
+    source <(tr -d '\r' < "$DIR/../../infra/flag_svc/.env")
     set +a
 fi
 
@@ -27,17 +27,18 @@ echo "============================================="
 echo "  Releasing Worker Build: ${BUILD_ID}"
 echo "============================================="
 
-# 3. Upload build-stamped flag assets to private R2
-FLAGS_DIR="$DIR/../flags"
-for file in "$FLAGS_DIR"/*.svg; do
+# 3. Package flags into build/${BUILD_ID}/flags/ and upload to private R2
+BUILD_DIR="$DIR/build/${BUILD_ID}/flags"
+mkdir -p "$BUILD_DIR"
+cp -r "$DIR/flags/"* "$BUILD_DIR/"
+
+for file in "$BUILD_DIR"/*.svg; do
     filename=$(basename "$file")
-    basename="${filename%.*}"
-    stamped_name="${basename}-${BUILD_ID}.svg"
-    echo "Uploading asset to R2: ${stamped_name}..."
-    npx wrangler r2 object put "${BUCKET_NAME}/${stamped_name}" --file="$file" --content-type="image/svg+xml" --remote > /dev/null
+    echo "Uploading asset to R2: ${BUILD_ID}/${filename}..."
+    npx wrangler r2 object put "${BUCKET_NAME}/${BUILD_ID}/${filename}" --file="$file" --content-type="image/svg+xml" --remote > /dev/null
 done
 
-echo "All assets uploaded to private R2 bucket: ${BUCKET_NAME}."
+echo "All assets packaged into build/${BUILD_ID}/flags/ and uploaded to private R2 bucket: ${BUCKET_NAME}."
 
 # 4. Deploy the Worker using Wrangler with the new BUILD_ID
 echo "Deploying Cloudflare Worker via Wrangler..."
@@ -47,4 +48,4 @@ echo ""
 echo "Deployment Complete!"
 echo "Verify endpoints:"
 echo "  Dynamic HTML: https://tunnel.cambrera.net/secure"
-echo "  Country Flag: https://tunnel.cambrera.net/secure/US (redirects to US-${BUILD_ID}.svg)"
+echo "  Country Flag: https://tunnel.cambrera.net/secure/US (redirects to ${BUILD_ID}/US.svg)"

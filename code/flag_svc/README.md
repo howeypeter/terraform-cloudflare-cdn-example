@@ -11,6 +11,14 @@ Microservice implementing Step 7 of the Cloudflare Application Services Assignme
 - **Private R2 Binding**: Fetches flag SVGs using native worker bindings (`env.FLAGS_BUCKET.get()`) without public R2 exposure.
 - **Graceful Fallback**: Automatically serves `default.svg` if an unseeded country code is visited.
 
+## Package & Build Structure
+
+- `src/index.js`: Worker entrypoint handling `/secure`, `/secure/:country`, and `/secure/:buildId/:country.svg`.
+- `flags/`: Canonical source vector SVG assets (`US.svg`, `CA.svg`, `GB.svg`, `default.svg`).
+- `build/<buildID>/flags/`: Release-packaged flag assets stamped with the active release build ID and uploaded to the private R2 bucket (`cambrera-prod-country-flags`).
+- `wrangler.jsonc`: Wrangler configuration including route pattern, R2 bucket bindings, and build variables.
+- `deploy.ps1` / `deploy.sh`: Release automation script creating the versioned build package, uploading to R2, and deploying to Cloudflare Edge.
+
 ## Development & Deployment
 
 ```bash
