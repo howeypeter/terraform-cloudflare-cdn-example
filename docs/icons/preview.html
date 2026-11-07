@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Architecture Icon Preview</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0F172A;
+    color: #F8FAFC;
+    padding: 40px;
+    margin: 0;
+  }
+  h2 {
+    color: #F48120;
+    margin-bottom: 24px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+  }
+  .card {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .card:hover {
+    border-color: #F48120;
+  }
+  .icon-wrapper {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: #0F172A;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #334155;
+  }
+  .label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 4px;
+  }
+  .sub {
+    font-size: 11px;
+    color: #94A3B8;
+  }
+</style>
+</head>
+<body>
+  <h2>Cloudflare Architecture Icon Set (Lucide Style)</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon-wrapper"><img src="1_cdn.svg" width="40" height="40"></div>
+      <div class="label">1. CDN</div>
+      <div class="sub">Distributed Caching</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="2_dns.svg" width="40" height="40"></div>
+      <div class="label">2. DNS</div>
+      <div class="sub">Domain Resolution</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="3_anycast_edge.svg" width="40" height="40"></div>
+      <div class="label">3. Anycast Edge</div>
+      <div class="sub">Global Transit Network</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="4_edge_worker.svg" width="40" height="40"></div>
+      <div class="label">4. Edge Worker</div>
+      <div class="sub">Serverless Compute</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="5_access_identity.svg" width="40" height="40"></div>
+      <div class="label">5. Access (IdP)</div>
+      <div class="sub">Zero Trust Identity</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="6_r2_storage.svg" width="40" height="40"></div>
+      <div class="label">6. R2 Storage</div>
+      <div class="sub">Object Storage Bucket</div>
+    </div>
+  </div>
+</body>
+</html>
