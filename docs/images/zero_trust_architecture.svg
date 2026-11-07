@@ -57,15 +57,15 @@
 
   <!-- ================= TIER 1: USER & DEVICE CARDS ================= -->
 
-  <!-- Card 1: Admin User -->
+  <!-- Card 1: Authorized Administrator -->
   <g transform="translate(50, 95)">
     <rect width="280" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
     <circle cx="35" cy="35" r="16" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
     <circle cx="35" cy="30" r="6" fill="#6D28D9"/>
     <path d="M25 45 C25 40, 45 40, 45 45" fill="#6D28D9"/>
-    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Admin User</text>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Authorized Administrator</text>
     <text x="65" y="46" font-size="10" font-weight="600" fill="#6D28D9">howey.peter@gmail.com</text>
-    <text x="65" y="62" font-size="9" fill="#64748B">Full Organization Administrator</text>
+    <text x="65" y="62" font-size="9" fill="#64748B">Google SSO · Whitelist across all policies</text>
   </g>
 
   <!-- Card 2: Tester User -->
@@ -74,9 +74,9 @@
     <circle cx="35" cy="35" r="16" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
     <circle cx="35" cy="30" r="6" fill="#0369A1"/>
     <path d="M25 45 C25 40, 45 40, 45 45" fill="#0369A1"/>
-    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Tester Persona</text>
-    <text x="65" y="46" font-size="10" font-weight="600" fill="#0369A1">howey.peter+tester@gmail.com</text>
-    <text x="65" y="62" font-size="9" fill="#15803D">Member of: "Testers" Group</text>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Testers Group Persona</text>
+    <text x="65" y="46" font-size="10" font-weight="600" fill="#0369A1">Access Group: "Testers"</text>
+    <text x="65" y="62" font-size="9" fill="#15803D">Role: Internal QA Testing Access</text>
   </g>
 
   <!-- Card 3: SaaS User -->
@@ -85,9 +85,9 @@
     <circle cx="35" cy="35" r="16" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
     <circle cx="35" cy="30" r="6" fill="#B45309"/>
     <path d="M25 45 C25 40, 45 40, 45 45" fill="#B45309"/>
-    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">SaaS User Persona</text>
-    <text x="65" y="46" font-size="10" font-weight="600" fill="#B45309">howey.peter+saas@gmail.com</text>
-    <text x="65" y="62" font-size="9" fill="#D97706">Member of: "SaaS Users" Group</text>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">SaaS Users Group Persona</text>
+    <text x="65" y="46" font-size="10" font-weight="600" fill="#B45309">Access Group: "SaaS Users"</text>
+    <text x="65" y="62" font-size="9" fill="#D97706">Role: SaaS SAML 2.0 Federation</text>
   </g>
 
   <!-- Card 4: WARP Client -->
