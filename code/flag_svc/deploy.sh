@@ -27,18 +27,15 @@ echo "============================================="
 echo "  Releasing Worker Build: ${BUILD_ID}"
 echo "============================================="
 
-# 3. Package flags into build/${BUILD_ID}/flags/ and upload to private R2
-BUILD_DIR="$DIR/build/${BUILD_ID}/flags"
-mkdir -p "$BUILD_DIR"
-cp -r "$DIR/flags/"* "$BUILD_DIR/"
-
-for file in "$BUILD_DIR"/*.svg; do
+# 3. Upload flags directly from canonical flags/ directory to private R2
+FLAGS_DIR="$DIR/flags"
+for file in "$FLAGS_DIR"/*.svg; do
     filename=$(basename "$file")
     echo "Uploading asset to R2: ${BUILD_ID}/${filename}..."
     npx wrangler r2 object put "${BUCKET_NAME}/${BUILD_ID}/${filename}" --file="$file" --content-type="image/svg+xml" --remote > /dev/null
 done
 
-echo "All assets packaged into build/${BUILD_ID}/flags/ and uploaded to private R2 bucket: ${BUCKET_NAME}."
+echo "All assets uploaded from flags/ to private R2 bucket: ${BUCKET_NAME} with prefix ${BUILD_ID}."
 
 # 4. Deploy the Worker using Wrangler with the new BUILD_ID
 echo "Deploying Cloudflare Worker via Wrangler..."
@@ -48,4 +45,4 @@ echo ""
 echo "Deployment Complete!"
 echo "Verify endpoints:"
 echo "  Dynamic HTML: https://tunnel.cambrera.net/secure"
-echo "  Country Flag: https://tunnel.cambrera.net/secure/US (redirects to ${BUILD_ID}/US.svg)"
+echo "  Country Flag: https://tunnel.cambrera.net/secure/US (serves ${BUILD_ID}/US.svg)"

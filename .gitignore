@@ -40,3 +40,9 @@ tfplan
 
 # Re-include the placeholder credentials file
 !.env.example
+
+# Local homelab resources
+infra/homelab_svc/
+homelab/
+homelab_media_server/
+scratch/

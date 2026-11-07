@@ -1,8 +1,22 @@
+# Dynamic lookup for account and zones
+data "cloudflare_accounts" "this" {}
+
+data "cloudflare_zones" "all" {
+  account = {
+    id = one(data.cloudflare_accounts.this.result).id
+  }
+}
+
+locals {
+  zones   = { for z in data.cloudflare_zones.all.result : z.name => z }
+  zone_id = local.zones["cambrera.net"].id
+}
+
 # www.cambrera.net behind Cloudflare (orange cloud), proxied to the http-echo origin (infra_aws: the Beanstalk ALB,
 # HTTPS on 443 with an ACM certificate). The origin record (www-origin, DNS only) is in infra/common.
 module "cdn" {
   source  = "../../tf_cdn"
-  zone_id = "540470e266d01ed15c67e0ba13e3ef63" # cambrera.net
+  zone_id = local.zone_id
 
   proxied_records = {
     www = {

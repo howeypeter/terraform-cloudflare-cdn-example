@@ -1,6 +1,6 @@
 # Format file to autogenerate README.md
 # Usage (from the tf_cdn/ folder): terraform-docs .
-# Regenerates the module tables in the root README.md between the BEGIN_TF_DOCS_CDN / END_TF_DOCS_CDN markers.
+# Regenerates the module tables in README.md between the BEGIN_TF_DOCS_TF_CDN / END_TF_DOCS_TF_CDN markers.
 
 version: ""
 
@@ -14,9 +14,9 @@ sort:
   by: required # required inputs first
 
 output:
-  file: "../README.md"
+  file: "README.md"
   mode: inject
   template: |-
-    <!-- BEGIN_TF_DOCS_CDN -->
+    <!-- BEGIN_TF_DOCS_TF_CDN -->
     {{ .Content }}
-    <!-- END_TF_DOCS_CDN -->
+    <!-- END_TF_DOCS_TF_CDN -->

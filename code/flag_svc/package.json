@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "pwsh -File ./deploy.ps1 || bash ./deploy.sh || wrangler deploy"
+    "deploy": "pwsh -File ./deploy.ps1 || bash ./deploy.sh || wrangler deploy",
+    "deploy:worker-only": "wrangler deploy",
+    "deploy:full": "bash ./deploy.sh"
   },
   "devDependencies": {
     "wrangler": "^4.158.0"

@@ -1,0 +1,22 @@
+# Format file to autogenerate README.md
+# Usage (from the infra_aws/ folder): terraform-docs .
+# Regenerates the module tables in README.md between the BEGIN_TF_DOCS_INFRA_AWS / END_TF_DOCS_INFRA_AWS markers.
+
+version: ""
+
+formatter: "markdown"
+
+settings:
+  lockfile: false # report only provider versions declared in code, not the local lock file
+
+sort:
+  enabled: true
+  by: required # required inputs first
+
+output:
+  file: "README.md"
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS_INFRA_AWS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS_INFRA_AWS -->

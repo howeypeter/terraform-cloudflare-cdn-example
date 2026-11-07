@@ -29,7 +29,23 @@ export default {
       const filename = assetMatch[2];
       const r2Key = `${requestedBuild}/${filename}`;
 
-      // Retrieve directly from private R2 bucket
+      // Check Cloudflare Edge Cache API first (caches.default)
+      const cache = caches.default;
+      const cacheKey = new Request(url.toString(), { method: "GET" });
+      let response = await cache.match(cacheKey);
+
+      if (response) {
+        // Edge Cache Hit!
+        const hitHeaders = new Headers(response.headers);
+        hitHeaders.set("CF-Cache-Status", "HIT");
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: hitHeaders
+        });
+      }
+
+      // Edge Cache Miss: Retrieve directly from private R2 bucket
       let object = await env.FLAGS_BUCKET.get(r2Key);
       if (!object) {
         // Fallback to default asset within the same release
@@ -47,15 +63,21 @@ export default {
       object.writeHttpMetadata(headers);
       headers.set("Content-Type", "image/svg+xml");
       
-      // Professional Services Immutable Caching
-      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      // Professional Services Immutable Caching & Edge Cache Directives
+      headers.set("Cache-Control", "public, max-age=31536000, s-maxage=31536000, immutable");
       headers.set("X-Cache-Strategy", "Immutable-Release-Prefix");
+      headers.set("CF-Cache-Status", "MISS");
 
       if (object.httpEtag) {
         headers.set("ETag", object.httpEtag);
       }
 
-      return new Response(object.body, { headers });
+      response = new Response(object.body, { headers });
+
+      // Asynchronously populate Cloudflare Edge Cache
+      ctx.waitUntil(cache.put(cacheKey, response.clone()));
+
+      return response;
     }
 
     // 3. Canonical Country path: /secure/:country (Step 7.c requirement)

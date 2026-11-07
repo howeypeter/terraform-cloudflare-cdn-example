@@ -13,12 +13,6 @@ locals {
 }
 
 # Per zone, keyed by zone name.
-data "cloudflare_dns_records" "zone" {
-  for_each = local.zones
-
-  zone_id = each.value.id
-}
-
 data "cloudflare_rulesets" "zone" {
   for_each = local.zones
 
@@ -32,17 +26,3 @@ data "cloudflare_lists" "account" {
 
 # Cloudflare's edge IP ranges (public; no permission needed).
 data "cloudflare_ip_ranges" "this" {}
-
-# Enterprise only: uncomment with the matching outputs. See README.md.
-# data "cloudflare_logpush_jobs" "zone" {
-#   for_each = local.zones
-#
-#   zone_id = each.value.id
-# }
-#
-# data "cloudflare_logpush_dataset_field" "http_requests" {
-#   for_each = local.zones
-#
-#   zone_id    = each.value.id
-#   dataset_id = "http_requests"
-# }

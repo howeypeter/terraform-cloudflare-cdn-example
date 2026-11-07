@@ -8,13 +8,6 @@ output "zones" {
   value       = { for name, z in local.zones : name => { id = z.id, status = z.status, name_servers = z.name_servers } }
 }
 
-output "dns_records" {
-  description = "DNS records per zone (zone name => records with IDs, for terraform import)."
-  value = { for name, d in data.cloudflare_dns_records.zone : name => [
-    for r in d.result : { id = r.id, name = r.name, type = r.type, content = r.content, proxied = r.proxied }
-  ] }
-}
-
 output "rulesets" {
   description = "Rulesets per zone (zone name => rulesets with phase and ID, for terraform import)."
   value = { for name, d in data.cloudflare_rulesets.zone : name => [
@@ -34,14 +27,3 @@ output "cloudflare_ip_ranges" {
     ipv6 = data.cloudflare_ip_ranges.this.ipv6_cidrs
   }
 }
-
-# Enterprise only: uncomment with the matching data sources in data.tf.
-# output "logpush_jobs" {
-#   description = "Logpush jobs per zone."
-#   value       = { for name, d in data.cloudflare_logpush_jobs.zone : name => d.result }
-# }
-#
-# output "logpush_fields" {
-#   description = "Fields available in the http_requests dataset, per zone."
-#   value       = { for name, d in data.cloudflare_logpush_dataset_field.http_requests : name => d.fields }
-# }

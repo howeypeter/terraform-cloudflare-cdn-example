@@ -15,7 +15,7 @@ DNS records and the zone itself stay in [`tf_dns`](../tf_dns).
 
 Used by `infra/www_svc`.
 
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGIN_TF_DOCS_TF_CDN -->
 ## Requirements
 
 | Name | Version |
@@ -59,4 +59,4 @@ No modules.
 | ---- | ----------- |
 | <a name="output_proxied_records"></a> [proxied\_records](#output\_proxied\_records) | Proxied records (key => ID, full name, origin). |
 | <a name="output_redirects_ruleset_id"></a> [redirects\_ruleset\_id](#output\_redirects\_ruleset\_id) | ID of the redirects ruleset (null when canonical\_redirect is null). |
-<!-- END_TF_DOCS -->
+<!-- END_TF_DOCS_TF_CDN -->

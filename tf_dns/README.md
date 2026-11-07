@@ -12,7 +12,7 @@ Module: a Cloudflare DNS zone and its resource records.
 
 Used by `infra/common`.
 
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGIN_TF_DOCS_TF_DNS -->
 ## Requirements
 
 | Name | Version |
@@ -53,4 +53,4 @@ No modules.
 | <a name="output_account_id"></a> [account\_id](#output\_account\_id) | The account that owns the zone. |
 | <a name="output_resource_records"></a> [resource\_records](#output\_resource\_records) | DNS records managed by this module (key => ID, full name, type, content). |
 | <a name="output_zone"></a> [zone](#output\_zone) | The zone's ID, status (pending until the registrar points at name\_servers, then active), and the nameservers to set at the registrar. |
-<!-- END_TF_DOCS -->
+<!-- END_TF_DOCS_TF_DNS -->
