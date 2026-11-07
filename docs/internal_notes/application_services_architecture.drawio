@@ -42,18 +42,18 @@
           <mxGeometry x="200" y="230" width="54" height="54" as="geometry"/>
         </mxCell>
 
-        <!-- 5. Landing Page (Worker flag_svc) -->
-        <mxCell id="node_landing" value="&lt;b&gt;Landing Page (Worker: flag_svc)&lt;/b&gt;&#xa;&lt;font color=&quot;#0284C7&quot;&gt;&lt;b&gt;https://tunnel.cambrera.net/secure&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;Detects Country (CF-IPCountry) &amp;amp; Identity&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#F38020;strokeWidth=2;align=center;" vertex="1" parent="cf_edge_container">
+        <!-- 5. Cloudflare Worker (flag_svc) -->
+        <mxCell id="node_worker" value="&lt;b&gt;Cloudflare Worker (flag_svc)&lt;/b&gt;&#xa;&lt;font color=&quot;#0284C7&quot;&gt;&lt;b&gt;https://tunnel.cambrera.net/secure*&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;Edge Compute | CF-IPCountry | caches.default&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#F38020;strokeWidth=2;align=center;" vertex="1" parent="cf_edge_container">
           <mxGeometry x="340" y="215" width="240" height="80" as="geometry"/>
         </mxCell>
 
-        <!-- 6. Private R2 Bucket -->
-        <mxCell id="node_r2" value="Private R2 Bucket&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;272 Country Flag SVGs&lt;/font&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%0A%20%20%3C%21--%20Bucket%20%2F%20Database%20Cylinder%20Body%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2018%20V46%20C12%2053%2052%2053%2052%2046%20V18%22%20fill%3D%22%23FFF7ED%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3C%21--%20Middle%20Tier%20Segment%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2032%20C12%2039%2052%2039%2052%2032%22%20stroke%3D%22%2394A3B8%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3C%21--%20Bottom%20Tier%20Segment%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2046%20C12%2053%2052%2053%2052%2046%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%21--%20Top%20Orange%20Storage%20Rim%20%2F%20Lid%20--%3E%0A%20%20%3Cellipse%20cx%3D%2232%22%20cy%3D%2218%22%20rx%3D%2220%22%20ry%3D%228%22%20fill%3D%22%23F38020%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%21--%20Inner%20Highlight%20--%3E%0A%20%20%3Cellipse%20cx%3D%2232%22%20cy%3D%2218%22%20rx%3D%2214%22%20ry%3D%225%22%20fill%3D%22%23FAAE40%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3C%21--%20Cloudflare%20%27R2%27%20Badge%20%2F%20Symbol%20--%3E%0A%20%20%3Crect%20x%3D%2223%22%20y%3D%2232%22%20width%3D%2218%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23F38020%22%2F%3E%0A%20%20%3Ctext%20x%3D%2232%22%20y%3D%2241%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%229%22%20fill%3D%22%23FFFFFF%22%3ER2%3C%2Ftext%3E%0A%3C%2Fsvg%3E;" vertex="1" parent="cf_edge_container">
-          <mxGeometry x="670" y="230" width="54" height="54" as="geometry"/>
+        <!-- 6. Private R2 Bucket (Storage Origin) -->
+        <mxCell id="node_r2" value="Private R2 Storage (Origin)&#xa;&lt;b&gt;cambrera-prod-country-flags&lt;/b&gt;&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;272 Worldwide Vector Flags (Zero AWS Egress)&lt;/font&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%0A%20%20%3C%21--%20Bucket%20%2F%20Database%20Cylinder%20Body%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2018%20V46%20C12%2053%2052%2053%2052%2046%20V18%22%20fill%3D%22%23FFF7ED%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3C%21--%20Middle%20Tier%20Segment%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2032%20C12%2039%2052%2039%2052%2032%22%20stroke%3D%22%2394A3B8%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3C%21--%20Bottom%20Tier%20Segment%20--%3E%0A%20%20%3Cpath%20d%3D%22M12%2046%20C12%2053%2052%2053%2052%2046%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%21--%20Top%20Orange%20Storage%20Rim%20%2F%20Lid%20--%3E%0A%20%20%3Cellipse%20cx%3D%2232%22%20cy%3D%2218%22%20rx%3D%2220%22%20ry%3D%228%22%20fill%3D%22%23F38020%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%21--%20Inner%20Highlight%20--%3E%0A%20%20%3Cellipse%20cx%3D%2232%22%20cy%3D%2218%22%20rx%3D%2214%22%20ry%3D%225%22%20fill%3D%22%23FAAE40%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3C%21--%20Cloudflare%20%27R2%27%20Badge%20%2F%20Symbol%20--%3E%0A%20%20%3Crect%20x%3D%2223%22%20y%3D%2232%22%20width%3D%2218%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23F38020%22%2F%3E%0A%20%20%3Ctext%20x%3D%2232%22%20y%3D%2241%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%229%22%20fill%3D%22%23FFFFFF%22%3ER2%3C%2Ftext%3E%0A%3C%2Fsvg%3E;" vertex="1" parent="cf_edge_container">
+          <mxGeometry x="660" y="215" width="60" height="60" as="geometry"/>
         </mxCell>
 
-        <!-- 7. Tunnel Edge Anchor -->
-        <mxCell id="node_pop" value="Cloudflare Anycast PoP&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;Tunnel Edge Ingress Anchor&lt;/font&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M17.5%2019H9a7%207%200%201%201%206.71-9h1.79a4.5%204.5%200%201%201%200%209Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22m13%2010-3%205h4l-2%205%22%20stroke%3D%22%23F48120%22%20fill%3D%22%23F48120%22%2F%3E%0A%3C%2Fsvg%3E;" vertex="1" parent="cf_edge_container">
+        <!-- 7. Cloudflare Tunnel Edge Ingress -->
+        <mxCell id="node_tunnel_edge" value="Cloudflare Tunnel Edge&#xa;&lt;b&gt;tunnel.cambrera.net&lt;/b&gt;&#xa;&lt;font color=&quot;#64748B&quot; size=&quot;1&quot;&gt;Edge Proxy for AWS Origin Tunnel&lt;/font&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M17.5%2019H9a7%207%200%201%201%206.71-9h1.79a4.5%204.5%200%201%201%200%209Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22m13%2010-3%205h4l-2%205%22%20stroke%3D%22%23F48120%22%20fill%3D%22%23F48120%22%2F%3E%0A%3C%2Fsvg%3E;" vertex="1" parent="cf_edge_container">
           <mxGeometry x="430" y="440" width="60" height="42" as="geometry"/>
         </mxCell>
 
@@ -66,26 +66,26 @@
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="edge_idp_landing" value="Authenticated Session" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#15803D;" edge="1" parent="cf_edge_container" source="node_idp" target="node_landing">
+        <mxCell id="edge_idp_worker" value="Authenticated Identity" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#15803D;" edge="1" parent="cf_edge_container" source="node_idp" target="node_worker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- Link 1: View Flag -> R2 Bucket -->
-        <mxCell id="edge_landing_r2" value="Link 1: View Flag&#xa;get(&quot;US.svg&quot;)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EA580C;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#C2410C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_landing" target="node_r2">
+        <!-- Link 1: View Flag -> Private R2 Bucket via Native Worker Binding -->
+        <mxCell id="edge_worker_r2" value="View Flag (/secure/{country})&#xa;env.FLAGS_BUCKET.get()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontStyle=1;fontColor=#C2410C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_worker" target="node_r2">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="edge_r2_landing" value="SVG Stream (200)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#15803D;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_r2" target="node_landing">
+        <mxCell id="edge_r2_worker" value="SVG Stream (R2 Origin)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#15803D;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_r2" target="node_worker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- Link 2: View Headers w/ Auth -> Tunnel Edge Anchor -->
-        <mxCell id="edge_landing_pop" value="Link 2: View Headers w/ Auth&#xa;(/secure/headers)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#1D4ED8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_landing" target="node_pop">
+        <!-- Link 2: View Headers w/ Auth -> Tunnel Edge Ingress -->
+        <mxCell id="edge_worker_tunnel_edge" value="View Headers w/ Auth&#xa;(/secure/headers)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=1.8;fontSize=10;fontStyle=1;fontColor=#1D4ED8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_worker" target="node_tunnel_edge">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
         <!-- Link 3: View Headers w/out Auth -> CDN Cache / Open Endpoint -->
-        <mxCell id="edge_landing_noauth" value="Link 3: View Headers w/out Auth&#xa;(https://tunnel.cambrera.net/)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=1.8;dashed=1;fontSize=10;fontStyle=1;fontColor=#475569;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_landing" target="node_cdn">
+        <mxCell id="edge_worker_noauth" value="View Headers w/out Auth&#xa;(https://tunnel.cambrera.net/)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=1.8;dashed=1;fontSize=10;fontStyle=1;fontColor=#475569;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="cf_edge_container" source="node_worker" target="node_cdn">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
@@ -157,8 +157,8 @@
           </mxGeometry>
         </mxCell>
 
-        <!-- PERSISTENT OUTBOUND-ONLY QUIC TUNNEL (Edge PoP to Daemon) -->
-        <mxCell id="edge_quic_tunnel" value="PERSISTENT OUTBOUND-ONLY QUIC TUNNEL&#xa;&lt;font size=&quot;1&quot; color=&quot;#0369A1&quot;&gt;UDP 7844 | Zero Inbound Firewall Ports | Origin Cloaked&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284C7;strokeWidth=3;dashed=1;dashPattern=6 4;fontSize=11;fontStyle=1;fontColor=#0369A1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="node_pop" target="node_tunnel_daemon">
+        <!-- PERSISTENT OUTBOUND-ONLY QUIC TUNNEL (Tunnel Edge to AWS cloudflared) -->
+        <mxCell id="edge_quic_tunnel" value="PERSISTENT OUTBOUND-ONLY QUIC TUNNEL&#xa;&lt;font size=&quot;1&quot; color=&quot;#0369A1&quot;&gt;UDP 7844 | Zero Inbound Firewall Ports | Origin Cloaked&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284C7;strokeWidth=3;dashed=1;dashPattern=6 4;fontSize=11;fontStyle=1;fontColor=#0369A1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="node_tunnel_edge" target="node_tunnel_daemon">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="800" y="501"/>

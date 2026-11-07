@@ -58,7 +58,7 @@ To inspect and test the live application:
 - **Behavior**: Intercepts incoming HTTP requests and serializes the complete headers map into JSON/plain-text.
 
 ### Step 2: Traffic Proxied Through Cloudflare
-- **Implementation**: The zone `cambrera.net` was assigned to Cloudflare nameservers (`kurt.ns.cloudflare.com`, `marjory.ns.cloudflare.com`).
+- **Implementation**: The zone `cambrera.net` was assigned to Cloudflare nameservers (`bradley.ns.cloudflare.com`, `evelyn.ns.cloudflare.com`).
 - **Configuration**:
   - Apex `cambrera.net` and `www.cambrera.net` configured as proxied (orange-clouded) CNAME records via modular Terraform (`tf_cdn` calling `cloudflare_dns_record`).
   - Single Redirect ruleset applied at Cloudflare's edge to redirect `http://` and apex traffic to `https://www.cambrera.net` in a single edge hop.
