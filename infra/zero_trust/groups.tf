@@ -1,4 +1,7 @@
 # Cloudflare Zero Trust Access Groups (Exercise 2)
+# Note: Consumer Google OAuth (@gmail.com) does not permit sign-in with plus-aliases
+# (e.g. howey.peter+tester@gmail.com). To test alias personas, use Cloudflare One-Time PIN (OTP).
+# For Google OAuth testing, howey.peter@gmail.com serves as the authorized root identity.
 
 # 1. Testers group: allowed access to the self-hosted application
 resource "cloudflare_zero_trust_access_group" "testers" {

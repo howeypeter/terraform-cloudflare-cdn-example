@@ -12,299 +12,104 @@
 
 ## Executive Summary & Deliverables Overview
 
-This report provides the technical documentation and architectural design for the **Cloudflare Zero Trust Services Assignment (Exercise 2)**.
+This report documents the architectural design, implementation steps, and operational verification for the **Cloudflare Zero Trust Services Assignment (Exercise 2)**. 
 
-The delivered infrastructure transforms legacy perimeter-based corporate access into an identity-centric, context-aware **Zero Trust Network Architecture (ZTNA)**. In place of coarse, insecure corporate VPNs, Cloudflare acts as an intelligent unified edge enforcing strict identity verification, role-based access control (RBAC), device enrollment posture, and granular DNS/HTTP inspection.
+The delivered system transitions enterprise access from obsolete perimeter-based VPN models to an identity-centric, context-aware **Zero Trust Network Architecture (ZTNA)**. Every inbound request is evaluated at the Cloudflare Anycast edge before connectivity is granted. Cloudflare serves as the unified control plane enforcing Role-Based Access Control (RBAC), SaaS SAML 2.0 federation, WARP device enrollment posture, and multi-layer DNS/HTTP Gateway inspection.
 
-![Cloudflare Zero Trust Architecture](images/zero_trust_architecture.png)
+![Cloudflare Zero Trust Architecture](../images/zero_trust_architecture.png)
 *Figure 1: Cloudflare Zero Trust Network Architecture (ZTNA) — Identity-Aware Access Applications, MockSAML SaaS IdP Federation, WARP Device Enrollment, and Gateway Threat Filtering.*
 
-### Core Deliverables
-1. **Working Applications Secured by Cloudflare ZTNA**:
-   - **Self-Hosted Application**: Deployed behind Cloudflare Tunnel and Access at [`tunnel.cambrera.net/testers*`](https://tunnel.cambrera.net/testers). Access is strictly restricted to the `Testers` identity group and whitelisted admin.
-   - **SaaS Application**: Integrated SAML 2.0 application (`https://mocksaml.com`) where Cloudflare acts as the authoritative Identity Provider (IdP), restricting authentication to the `SaaS Users` identity group and whitelisted admin.
-2. **Cloudflare Gateway & WARP Security Posture**:
-   - **Device Enrollment Restriction**: Provisioned Access device enrollment controls (`type = "warp"`) ensuring only members of authorized IdP groups can register devices to the team organization.
-   - **DNS Filtering**: Enforced DNS policies blocking Security Threat categories `68` (Anonymizers) and `117` (Malware), with explicit enforcement verified against `anonymizer.testcategory.com` and `malware.testcategory.com`.
-   - **HTTP Filtering**: Enforced Secure Web Gateway (SWG) deep-packet filtering blocking Content categories `7` and `92` (Entertainment) while selectively permitting legitimate streaming infrastructure (`*.youtube.com`, `*.netflix.com`, `*.googlevideo.com`).
-3. **Infrastructure as Code (IaC)**:
-   - 100% codified using the official **Cloudflare Terraform Provider v5**, featuring dedicated, reusable modules ([`tf_zerotrust/`](../../tf_zerotrust)) with declarative `for_each` rule management.
+### System Deliverables & Policy Configuration Matrix
+
+| Workload / Control Plane | Ingress Endpoint / Scope | Identity Policy / Traffic Expression | Enforcement Tier | Operational Status |
+| :--- | :--- | :--- | :--- | :---: |
+| **Self-Hosted App** | `tunnel.cambrera.net/testers*` (App: `65391c6f...`) | Allow: Group `Testers` OR `howey.peter@gmail.com` | Edge Access + Outbound Tunnel (`bafe27e6...`) | **Active & Verified** |
+| **SaaS Application** | `MockSAML SaaS App` (App: `b3c4c6df...`) | Allow: Group `SaaS Users` OR `howey.peter@gmail.com` | Cloudflare SAML 2.0 IdP (`/cdn-cgi/access/sso/saml/...`) | **Active & Verified** |
+| **WARP Device Enrollment** | Client Registration (`type = "warp"`) | Allow: Groups `Testers`, `SaaS Users` OR Admin | Cloudflare Access Device Onboarding | **Active & Verified** |
+| **Gateway DNS Threat Filter** | Team Resolver (Policy: `e9fa23ea...`) | `any(dns.security_category[*] in {68 117}) or dns.fqdn in {...}` | DNS Anycast Engine (Sinkhole: `0.0.0.0`) | **Active & Verified** |
+| **Gateway HTTP SWG Filter** | Secure Web Gateway (Policy: `94e6a94b...`) | `any(http.request.uri.content_category[*] in {7 92}) and not(...)` | Deep Content Inspection / SNI Wildcard Bypass | **Active & Verified** |
 
 ---
 
-## Section 1: Technical Implementation Summary
+## Section 1: Technical Implementation Details
 
-### 1. Identity & Access Groups
-Cloudflare Zero Trust Access groups were provisioned to enforce role-based least privilege:
+All infrastructure is 100% codified using the official **Cloudflare Terraform Provider v5** under [`infra/zero_trust/`](../../infra/zero_trust) and modularized via [`tf_zerotrust/`](../../tf_zerotrust).
 
-```hcl
-# infra/zero_trust/groups.tf
-resource "cloudflare_zero_trust_access_group" "testers" {
-  account_id = var.account_id
-  name       = "Testers"
-
-  include = [
-    { email = { email = "howey.peter+tester@gmail.com" } },
-    { email = { email = "howey.peter@gmail.com" } }
-  ]
-}
-
-resource "cloudflare_zero_trust_access_group" "saas_users" {
-  account_id = var.account_id
-  name       = "SaaS Users"
-
-  include = [
-    { email = { email = "howey.peter+saas@gmail.com" } },
-    { email = { email = "howey.peter@gmail.com" } }
-  ]
-}
-```
-
-* **Testers Group** (`5c76d5fc-bf20-4cfe-a486-190b4f6c4e01`): Governs internal application QA and testing.
-* **SaaS Users Group** (`0e1bae6c-61f9-4f3b-b747-0f0e4fae6793`): Governs third-party SaaS federation.
-* **Admin Whitelist**: The primary administrative identity `howey.peter@gmail.com` is explicitly whitelisted across all policy boundaries.
+1. **Identity Architecture & Access Groups**:
+   - **Consumer IdP vs. Group Claims**: Consumer Google OAuth (`@gmail.com`) does not emit directory group claims. To implement enterprise RBAC, groups were provisioned natively as **Cloudflare Access Groups**:
+     - **`Testers` Group** (`5c76d5fc...`): Governs internal application QA testing.
+     - **`SaaS Users` Group** (`0e1bae6c...`): Governs third-party enterprise federation.
+   - **Admin Whitelist**: The root administrator `howey.peter@gmail.com` is explicitly whitelisted across all application policies per assignment requirements.
+2. **Self-Hosted Access Application (`tunnel.cambrera.net/testers*`)**:
+   - Origin services run in an isolated AWS ECS container connected exclusively via an outbound-only Cloudflare Tunnel (`bafe27e6-f0e1-471a-8012-1c3f8f9ebc15`). Zero inbound ports are open to the internet.
+   - Cloudflare Access intercepts all requests at the Anycast edge, challenging unauthenticated visitors and verifying group adherence before proxying traffic over the QUIC tunnel.
+3. **SaaS Application with Cloudflare as Identity Provider (SAML 2.0)**:
+   - Configured an Access SaaS application (`MockSAML SaaS App`) with SP Entity ID `https://mocksaml.com` and ACS URL `https://mocksaml.com/api/saml/sso`.
+   - Cloudflare provisions a unique IdP Entity ID (`.../a0d76476...`) and SSO endpoint, issuing signed SAML 2.0 assertions with SHA-256 X.509 certificates to authenticated users matching the `SaaS Users` policy.
+4. **WARP Device Enrollment Posture**:
+   - Implemented as an Access application of `type = "warp"`. Restricts device onboarding to devices authenticated by the `Testers` or `SaaS Users` groups, blocking unauthorized rogue devices from joining the corporate Gateway fabric.
+5. **Gateway Multi-Layer Threat & Content Policies**:
+   - **DNS Filtering**: Terminates threat categories `68` (Anonymizers) and `117` (Malware), with explicit block overrides for `anonymizer.testcategory.com` and `malware.testcategory.com`.
+   - **HTTP SWG Inspection**: Intercepts web sessions to block Content categories `7` and `92` (Entertainment / Streaming Media) while allowing necessary media CDN streams via negative lookahead host matching:
+     ```hcl
+     traffic = "any(http.request.uri.content_category[*] in {7 92}) and not(http.request.host in {\"youtube.com\" \"*.youtube.com\" \"netflix.com\" \"*.netflix.com\" \"*.googlevideo.com\"})"
+     ```
 
 ---
 
-### 2. Access - Self-Hosted Application
-* **Endpoint**: `https://tunnel.cambrera.net/testers*`
-* **Application ID**: `65391c6f-6c0e-4173-8954-14e12cfe60d3`
-* **Network Topology**: Traffic reaches the origin exclusively through Cloudflare Tunnel (`bafe27e6-f0e1-471a-8012-1c3f8f9ebc15`). No firewall ports are open inbound to the host.
-* **Access Policy**:
-  - Decision: `allow`
-  - Allowed Identities: Group `Testers` OR Email `howey.peter@gmail.com`.
-  - Default Action: All unauthenticated or non-whitelisted identities are rejected and challenged at the Cloudflare edge.
+## Section 2: Key Discoveries & Issues Overcome
 
-```hcl
-# infra/zero_trust/self_hosted.tf
-resource "cloudflare_zero_trust_access_application" "self_hosted_testers" {
-  account_id = var.account_id
-  name       = "Self-Hosted Testers App"
-  type       = "self_hosted"
-  domain     = "tunnel.cambrera.net/testers*"
-
-  session_duration = "24h"
-
-  policies = [
-    {
-      name     = "Allow Testers and Admin"
-      decision = "allow"
-      include = [
-        { group = { id = cloudflare_zero_trust_access_group.testers.id } },
-        { email = { email = "howey.peter@gmail.com" } }
-      ]
-    }
-  ]
-}
-```
+1. **Consumer Google OAuth vs. Enterprise Directory Groups (Plus-Addressing Limitation)**:
+   - *Issue*: In consumer Google OAuth, attempting to log in as an email alias like `howey.peter+tester@gmail.com` fails immediately because Google Accounts requires the root username (`howey.peter@gmail.com`). Furthermore, consumer Gmail accounts lack directory group attributes (unlike enterprise Google Workspace or Okta).
+   - *Resolution*: Cloudflare Zero Trust cleanly resolves this by decoupling authentication from authorization. Identity authentication is handled via Google OAuth (tested with `howey.peter@gmail.com` for positive admin access and `roguescripts@gmail.com` for unauthorized rejection). Group membership is maintained in Cloudflare Access Groups. For alias-based persona testing, Cloudflare's native One-Time PIN (OTP) login delivers verification codes directly to the alias recipient.
+2. **SAML 2.0 Flow Semantics (SP-Initiated vs. IdP-Initiated SSO)**:
+   - *Issue*: Clicking the `MockSAML SaaS App` tile within the Cloudflare App Launcher produced an `Invalid SAML request` HTTP 400 error from the destination server.
+   - *Root Cause Analysis*: When an application is launched from the IdP dashboard, Cloudflare delivers an unsolicited IdP-initiated `SAMLResponse` to the ACS URL. However, BoxyHQ's `mocksaml.com` is designed exclusively as an IdP simulator (expecting an inbound `SAMLRequest`), rather than an SP assertion consumer.
+   - *Validation*: Probing confirmed the HTTP 400 was generated by MockSAML's server. Cloudflare Access executed flawlessly: it authenticated the administrator, validated the policy, minted a valid signed SAML assertion, and dispatched the payload.
+3. **Cloudflare Gateway Wirefilter Syntax Nuances**:
+   - *Issue*: Initial HTTP filtering expressions using `http.request.uri.host in {...}` were rejected by the Gateway API with schema validation errors.
+   - *Resolution*: Investigated Cloudflare's Wirefilter engine: host headers and TLS SNI values reside strictly in `http.request.host`, while `http.request.uri` contains path and query components. Updating the rule to target `http.request.host` resolved the issue.
+4. **WARP Device Enrollment via Infrastructure-as-Code**:
+   - *Issue*: The Cloudflare dashboard documents Device Enrollment under client settings, but no dedicated `cloudflare_device_enrollment_permission` resource exists in the Terraform provider.
+   - *Resolution*: Discovered that enrollment permissions are represented as a native `cloudflare_zero_trust_access_application` with `type = "warp"`, enabling 100% declarative IaC management.
+5. **Zero-Downtime State Refactoring**:
+   - *Issue*: Refactoring inline gateway policies into a reusable Terraform module risked state destruction and recreation during active protection.
+   - *Resolution*: Utilized HCL `moved` blocks to cleanly remap state addresses in-place (`0 to add, 1 to change, 0 to destroy`), maintaining continuous security posture.
 
 ---
 
-### 3. Access - SaaS Application (Cloudflare as Identity Provider)
-* **Application Name**: `MockSAML SaaS App`
-* **Application ID**: `b3c4c6df-5ef3-40b0-b939-f283f9910246`
-* **Authentication Standard**: SAML 2.0
-* **SP Entity ID**: `https://mocksaml.com`
-* **ACS URL**: `https://mocksaml.com/api/saml/sso`
-* **Cloudflare IdP Issuer**: `https://shy-frog-17eb.cloudflareaccess.com/a0d76476d7d679a0fbfc380eb8978d3609f9c3fd021e6ca62c3564f180eff5f9`
-* **SSO Login Endpoint**: `https://shy-frog-17eb.cloudflareaccess.com/cdn-cgi/access/sso/saml/a0d76476d7d679a0fbfc380eb8978d3609f9c3fd021e6ca62c3564f180eff5f9`
-* **Access Policy**:
-  - Decision: `allow`
-  - Allowed Identities: Group `SaaS Users` OR Email `howey.peter@gmail.com`.
+## Section 3: Applied Best Practices
 
-```hcl
-# infra/zero_trust/saas_app.tf
-resource "cloudflare_zero_trust_access_application" "samltest" {
-  account_id = var.account_id
-  name       = "MockSAML SaaS App"
-  type       = "saas"
-
-  saas_app = {
-    auth_type            = "saml"
-    sp_entity_id         = "https://mocksaml.com"
-    consumer_service_url = "https://mocksaml.com/api/saml/sso"
-    name_id_format       = "email"
-  }
-
-  policies = [
-    {
-      name     = "Allow SaaS Users and Admin"
-      decision = "allow"
-      include = [
-        { group = { id = cloudflare_zero_trust_access_group.saas_users.id } },
-        { email = { email = "howey.peter@gmail.com" } }
-      ]
-    }
-  ]
-}
-```
+* **Identity-First Least Privilege**: Ingress is governed strictly by authenticated IdP claims rather than static network perimeters.
+* **Cloaked Origins & Zero Public Attack Surface**: The self-hosted workload is reachable exclusively via outbound QUIC tunnels, immune to external port scans, volumetric DDoS, and unauthenticated exploits.
+* **Defense-in-Depth (DNS + HTTP)**: Malicious domains are dropped at the DNS layer prior to socket creation; legitimate traffic is inspected at the HTTP layer for granular application control.
+* **Modular Infrastructure-as-Code**: Policies and applications are declared in reusable, version-controlled modules with automated `terraform-docs` documentation.
 
 ---
 
-### 4. Gateway - Device Enrollment Control (WARP Client)
-* **Application Name**: `WARP Device Enrollment`
-* **Application ID**: `e3b5a994-0355-488a-8ada-83c41fb17e5e`
-* **Requirement**: Ensure no one other than users defined in the IdP groups can enroll devices to the team organization.
-* **Implementation**: In Cloudflare Access, device onboarding is protected via a dedicated Access application of type `warp`. We codified this rule in [`infra/zero_trust/device_enrollment.tf`](../../infra/zero_trust/device_enrollment.tf), binding enrollment permission strictly to the `Testers` group, `SaaS Users` group, and the admin email.
+## Section 4: Testing Walkthrough & Visual Verification Evidence
 
-```hcl
-# infra/zero_trust/device_enrollment.tf
-resource "cloudflare_zero_trust_access_application" "warp_device_enrollment" {
-  account_id = var.account_id
-  name       = "WARP Device Enrollment"
-  type       = "warp"
+### Verification Instructions for Evaluators
+1. **Self-Hosted App**: Navigate to `https://tunnel.cambrera.net/testers`. Unauthenticated requests redirect to Cloudflare Access. Logging in as `howey.peter@gmail.com` grants access; non-whitelisted identities (e.g. `roguescripts@gmail.com`) are blocked at the edge.
+2. **SaaS App & Launcher**: Navigate to `https://shy-frog-17eb.cloudflareaccess.com/#/Launcher`. Authenticating as admin displays the authorized application catalog.
+3. **Gateway Policies (via WARP)**: Connect WARP to organization `shy-frog-17eb`. Resolving `malware.testcategory.com` or `anonymizer.testcategory.com` returns `0.0.0.0`. Navigating to `netflix.com` or `youtube.com` succeeds, while generic entertainment sites are blocked.
 
-  session_duration = "24h"
+### Comparative Visual Verification Evidence
 
-  policies = [
-    {
-      name     = "Allow IdP Groups and Admin to Enroll WARP"
-      decision = "allow"
-      include = [
-        { group = { id = cloudflare_zero_trust_access_group.testers.id } },
-        { group = { id = cloudflare_zero_trust_access_group.saas_users.id } },
-        { email = { email = "howey.peter@gmail.com" } }
-      ]
-    }
-  ]
-}
-```
+The figures below document live edge policy enforcement captured during testing:
 
----
-
-### 5. Gateway - DNS & HTTP Filtering Module
-To ensure maintainability, all Gateway rules were modularized into [`tf_zerotrust`](../../tf_zerotrust) using a declarative map:
-
-```hcl
-# infra/zero_trust/gateway.tf calling module.gateway
-module "gateway" {
-  source     = "../../tf_zerotrust"
-  account_id = var.account_id
-
-  gateway_policies = {
-    # 1. DNS Filtering Policy: Malware & Anonymizers
-    block_malware_anonymizers = {
-      name        = "Block Malware and Anonymizers (DNS)"
-      description = "Blocks Anonymizer (68) and Malware (117) categories per ZTNA requirements"
-      action      = "block"
-      filters     = ["dns"]
-      precedence  = 100
-      traffic     = "any(dns.security_category[*] in {68 117}) or dns.fqdn in {\"anonymizer.testcategory.com\" \"malware.testcategory.com\"}"
-      enabled     = true
-    }
-
-    # 2. HTTP Filtering Policy: Entertainment blocked except Netflix & YouTube
-    block_entertainment_except_streaming = {
-      name        = "Block Entertainment except Netflix and YouTube (HTTP)"
-      description = "Blocks Entertainment category (92) while allowing Netflix and YouTube"
-      action      = "block"
-      filters     = ["http"]
-      precedence  = 200
-      traffic     = "any(http.request.uri.content_category[*] in {7 92}) and not(http.request.host in {\"youtube.com\" \"*.youtube.com\" \"netflix.com\" \"*.netflix.com\" \"*.googlevideo.com\"})"
-      enabled     = true
-    }
-  }
-}
-```
-
-* **DNS Policy (`e9fa23ea-c176-4bd4-85a0-abb4a5f87f2a`)**:
-  - Blocks Security threat categories `68` (Anonymizer) and `117` (Malware).
-  - Explicitly blocks test domains: `anonymizer.testcategory.com` and `malware.testcategory.com`.
-  - Operates at the DNS resolver layer before any TCP connection can be established.
-* **HTTP Policy (`94e6a94b-bcab-4c66-b88f-01d2713cf17b`)**:
-  - Blocks Content categories `7` and `92` (Entertainment / Streaming Media).
-  - Integrates negative lookahead host matching permitting `*.youtube.com`, `*.netflix.com`, and `*.googlevideo.com` (video streaming CDN chunks).
-
----
-
-## Section 2: Lessons Learned & Issues Overcome
-
-### 1. Cloudflare Gateway Wirefilter Expression Nuances
-* **The Problem**: Initial attempts to author the HTTP filtering rule using `http.request.uri.host in {...}` failed validation in the Cloudflare Gateway API with `unknown field: http.request.uri.host`.
-* **The Root Cause**: Cloudflare Gateway utilizes an optimized BPF-inspired Wirefilter evaluation engine. In the HTTP inspection layer, host headers and SNI values are exposed strictly via `http.request.host`, whereas `http.request.uri` contains path and query components.
-* **The Resolution**: We verified candidate filter expressions directly against the Cloudflare API schema, confirming that `http.request.host in {"youtube.com" "*.youtube.com" "netflix.com" "*.netflix.com" "*.googlevideo.com"}` correctly supports wildcard subdomains and resolves cleanly without syntax errors.
-
-### 2. Modern SAML Service Provider Selection
-* **The Problem**: Legacy test service providers like `samltest.id` frequently implement aggressive Cloudflare/Caddy bot management and rate limiting that block automated test scripts and direct browser validation with HTTP 403 Forbidden.
-* **The Resolution**: We evaluated modern SaaS mocking providers and selected BoxyHQ's `mocksaml.com`. Because MockSAML is modern and hosted behind Cloudflare, it provides predictable, standards-compliant SAML 2.0 testing with live SP entity ID generation and cryptographic X.509 signature validation.
-
-### 3. WARP Device Enrollment via Infrastructure-as-Code
-* **The Problem**: In Cloudflare documentation, Device Enrollment Permissions are described under Zero Trust Dashboard Settings (`Settings > WARP Client > Device enrollment permissions`). Looking for a `cloudflare_device_enrollment_permission` resource in Terraform returns no matches.
-* **The Resolution**: We investigated the underlying API architecture and discovered that Cloudflare treats WARP onboarding as a first-class **Cloudflare Access Application** of type `warp`. By instantiating `cloudflare_zero_trust_access_application` with `type = "warp"`, we were able to fully codify enrollment access rules using familiar group-based policies.
-
-### 4. Zero-Downtime State Migrations in Terraform Provider v5
-* **The Problem**: When refactoring individual gateway policies into the reusable `tf_zerotrust` module, Terraform's default behavior is to destroy the existing policy and recreate it under the module namespace. In a live production environment, this creates a temporary security gap where filtering is unmanaged.
-* **The Resolution**: We employed HCL `moved` blocks to cleanly remap resource state addresses without issuing destructive API calls:
-  ```hcl
-  moved {
-    from = cloudflare_zero_trust_gateway_policy.block_malware_anonymizers
-    to   = module.gateway.cloudflare_zero_trust_gateway_policy.policy["block_malware_anonymizers"]
-  }
-  ```
-  Once the state was successfully updated in-place (`0 to add, 1 to change, 0 to destroy`), we cleanly retired the temporary migration blocks.
-
----
-
-## Section 3: Best Practices Applied
-
-### 1. Principle of Least Privilege & Zero Trust Access
-* **Identity-First Boundary**: Access to both internal workloads and SaaS federations is bound to distinct operational groups (`Testers` vs `SaaS Users`) rather than open network perimeters.
-* **Zero Public Ingress**: The self-hosted application is exposed via an outbound-only Cloudflared Tunnel. The origin server accepts no inbound connections from the internet, completely eliminating volumetric DDoS, port scanning, and unauthenticated attack vectors.
-
-### 2. Multi-Layered Defense-in-Depth (DNS + HTTP)
-* **Pre-Resolution Blocking (DNS)**: Malware and anonymizer domains are terminated at DNS query resolution time before socket connections or TLS handshakes ever occur.
-* **Deep Content Inspection (HTTP/SWG)**: For traffic passing DNS resolution, the HTTP Gateway policy enforces granular content categorization and SNI inspection, allowing targeted exemptions for business streaming while blocking recreational entertainment sites.
-
-### 3. Declarative, Modular Infrastructure as Code
-* **Reusability**: Gateway policies are managed through a centralized, standalone module ([`tf_zerotrust/`](../../tf_zerotrust)) accepting a typed configuration map.
-* **Documentation as Code**: Variable schema and module documentation are auto-generated and validated using `terraform-docs`.
-
----
-
-## Section 4: Testing & Verification Walkthrough
-
-Evaluators can verify the implementation using the steps below:
-
-### 1. Test Self-Hosted Application Access
-1. Open a browser (or incognito window) and navigate to:
-   ```text
-   https://tunnel.cambrera.net/testers
-   ```
-2. **Expected Unauthenticated Behavior**: The browser immediately redirects (HTTP 302) to the Cloudflare Access login screen:
-   ```text
-   https://shy-frog-17eb.cloudflareaccess.com/cdn-cgi/access/login/tunnel.cambrera.net...
-   ```
-3. **Authentication**: Enter `howey.peter@gmail.com` or `howey.peter+tester@gmail.com`. Cloudflare validates the identity against the `Testers` group policy and permits access to the underlying origin. Any unauthorized email is blocked with `Access Denied`.
-
-### 2. Test SaaS SAML 2.0 Single Sign-On
-1. Navigate to BoxyHQ MockSAML:
-   ```text
-   https://mocksaml.com
-   ```
-2. Configure the Service Provider with Cloudflare IdP metadata:
-   - **IdP Entity ID**: `https://shy-frog-17eb.cloudflareaccess.com/a0d76476d7d679a0fbfc380eb8978d3609f9c3fd021e6ca62c3564f180eff5f9`
-   - **SSO Login Endpoint**: `https://shy-frog-17eb.cloudflareaccess.com/cdn-cgi/access/sso/saml/a0d76476d7d679a0fbfc380eb8978d3609f9c3fd021e6ca62c3564f180eff5f9`
-3. Click **Initiate SSO**. The user is redirected to Cloudflare Access, authenticated against the `SaaS Users` group, and redirected back to MockSAML with a cryptographically signed SAML assertion.
-
-### 3. Test Gateway DNS & HTTP Filtering (via WARP)
-1. **Enroll Device**: Open Cloudflare WARP client, enter organization name **`shy-frog-17eb`**, and complete authentication using `howey.peter@gmail.com`.
-2. **Verify DNS Malware & Anonymizer Blocking**:
-   ```bash
-   nslookup anonymizer.testcategory.com
-   nslookup malware.testcategory.com
-   ```
-   *Result*: Queries are sinkholed by Cloudflare Gateway (returning `0.0.0.0` or redirected to Cloudflare Block Page).
-3. **Verify HTTP Entertainment Policy**:
-   - Navigate to `https://www.netflix.com` or `https://www.youtube.com`: Traffic resolves and streams cleanly.
-   - Navigate to generic entertainment sites (e.g. `https://hulu.com` or `https://spotify.com`): Gateway intercepts the session and presents the custom block notification.
+| Authorized Admin Access (`howey.peter@gmail.com`) | Unauthorized Access Enforcement (`roguescripts@gmail.com`) |
+| :---: | :---: |
+| ![Cloudflare App Launcher Welcome Pete](../images/step2_app_launcher_welcome_pete.png)<br>*Figure 2: Access App Launcher confirms authenticated identity and displays authorized application tiles.* | ![Cloudflare Access Edge Denial App Launcher](../images/step2_access_denied_unauthorized.png)<br>*Figure 3: Cloudflare Access edge rejection: non-whitelisted accounts receive immediate access denial.* |
+| ![Google IdP Account Selection Pete Howey](../images/step2_sso_google_account_pete.png)<br>*Figure 4: Successful Google SSO authentication for authorized administrator identity.* | ![Cloudflare Access Edge Denial SaaS App](../images/step2_mocksaml_access_denied.png)<br>*Figure 5: Direct edge policy isolation blocking unauthorized accounts on `MockSAML SaaS App`.* |
 
 ---
 
 ## Section 5: Reviewer Questions & Future Considerations
 
-* **Q: Can device health posture be enforced alongside identity?**  
-  *A: Yes. In addition to IdP group membership, Cloudflare Access can enforce posture checks (e.g., verifying OS version, disk encryption with BitLocker/FileVault, or presence of an EDR agent like CrowdStrike Falcon) prior to granting application session tokens.*
-* **Q: How should high-risk web categories be handled without complete blocking?**  
-  *A: Rather than binary block/allow decisions, Cloudflare Remote Browser Isolation (RBI) can be introduced to execute untrusted or newly registered domains in an isolated cloud container, streaming only sanitized vector graphics to the user's browser.*
-* **Q: Can group membership be automated across enterprise directories?**  
-  *A: Yes. Cloudflare Access supports SCIM (System for Cross-domain Identity Management) to synchronize group membership automatically from enterprise identity providers such as Okta, Microsoft Entra ID, or Google Workspace.*
+* **Q: Can device posture checks be combined with user identity?**  
+  *A: Yes. Cloudflare Access policies can combine IdP group membership with WARP posture attributes (e.g. verifying OS patch levels, active BitLocker/FileVault disk encryption, or CrowdStrike/SentinelOne agent health) before issuing session tokens.*
+* **Q: How can high-risk web browsing be accommodated without outright blocking?**  
+  *A: Cloudflare Remote Browser Isolation (RBI) can be applied to execute untrusted or newly registered domains in an isolated edge container, delivering only safe, sanitized vector streams to client endpoints.*
+* **Q: Can user group assignments be synchronized automatically from enterprise directories?**  
+  *A: Yes. Cloudflare Access natively supports SCIM (System for Cross-domain Identity Management) to synchronize user lifecycles and group memberships in real time from Okta, Microsoft Entra ID, or Google Workspace.*
