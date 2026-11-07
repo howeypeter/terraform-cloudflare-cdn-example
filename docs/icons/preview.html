@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Architecture Icon Preview</title>
+<title>Official Cloudflare Product Icons Preview</title>
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -13,13 +13,19 @@
   }
   h2 {
     color: #F48120;
+    margin-bottom: 8px;
+  }
+  p {
+    color: #94A3B8;
+    margin-top: 0;
     margin-bottom: 24px;
+    font-size: 14px;
   }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
-    max-width: 900px;
+    max-width: 1000px;
   }
   .card {
     background: #1E293B;
@@ -43,6 +49,10 @@
     justify-content: center;
     border: 1px solid #334155;
   }
+  .icon-wrapper img {
+    max-width: 44px;
+    max-height: 44px;
+  }
   .label {
     font-size: 14px;
     font-weight: 600;
@@ -56,37 +66,48 @@
 </style>
 </head>
 <body>
-  <h2>Cloudflare Architecture Icon Set (Lucide & Cloudflare Brand Style)</h2>
+  <h2>Official Cloudflare Product Icons</h2>
+  <p>Extracted directly from Cloudflare's official design system (cf-icons / cloudflare-docs)</p>
   <div class="grid">
     <div class="card">
-      <div class="icon-wrapper"><img src="1_cdn.svg" width="46" height="46"></div>
-      <div class="label">1. Cloudflare CDN</div>
-      <div class="sub">Content Delivery Network</div>
-    </div>
-    <div class="card">
-      <div class="icon-wrapper"><img src="2_dns.svg" width="46" height="46"></div>
+      <div class="icon-wrapper"><img src="2_dns.svg"></div>
       <div class="label">2. Cloudflare DNS</div>
-      <div class="sub">Authoritative Nameserver</div>
+      <div class="sub">Official Product Icon</div>
     </div>
     <div class="card">
-      <div class="icon-wrapper"><img src="3_anycast_edge.svg" width="40" height="40"></div>
-      <div class="label">3. Anycast Edge</div>
-      <div class="sub">Global Transit Network</div>
+      <div class="icon-wrapper"><img src="cf_cache.svg"></div>
+      <div class="label">1. Cloudflare CDN</div>
+      <div class="sub">Official Cache / CDN Icon</div>
     </div>
     <div class="card">
-      <div class="icon-wrapper"><img src="4_edge_worker.svg" width="40" height="40"></div>
-      <div class="label">4. Edge Worker</div>
-      <div class="sub">Serverless Compute</div>
+      <div class="icon-wrapper"><img src="1_cloudflare_official.svg"></div>
+      <div class="label">Cloudflare Brandmark</div>
+      <div class="sub">Official Anycast Cloud</div>
     </div>
     <div class="card">
-      <div class="icon-wrapper"><img src="5_access_identity.svg" width="40" height="40"></div>
-      <div class="label">5. Access (IdP)</div>
-      <div class="sub">Zero Trust Identity</div>
+      <div class="icon-wrapper"><img src="cf_workers.svg"></div>
+      <div class="label">4. Cloudflare Workers</div>
+      <div class="sub">Official Serverless Icon</div>
     </div>
     <div class="card">
-      <div class="icon-wrapper"><img src="6_r2_storage.svg" width="40" height="40"></div>
-      <div class="label">6. R2 Storage</div>
-      <div class="sub">Object Storage Bucket</div>
+      <div class="icon-wrapper"><img src="cf_cloudflare-access.svg"></div>
+      <div class="label">5. Cloudflare Access</div>
+      <div class="sub">Official Zero Trust IdP</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="cf_r2.svg"></div>
+      <div class="label">6. Cloudflare R2</div>
+      <div class="sub">Official Object Storage</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="cf_gateway.svg"></div>
+      <div class="label">Cloudflare Gateway</div>
+      <div class="sub">Official SWG / DNS Filter</div>
+    </div>
+    <div class="card">
+      <div class="icon-wrapper"><img src="cf_cloudflare-one.svg"></div>
+      <div class="label">Cloudflare One</div>
+      <div class="sub">Zero Trust Platform</div>
     </div>
   </div>
 </body>
