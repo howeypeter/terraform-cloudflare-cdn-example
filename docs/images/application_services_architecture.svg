@@ -1,0 +1,272 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 700" width="1560" height="700" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.05"/>
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#EA580C"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16A34A"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8B5CF6"/>
+    </marker>
+  </defs>
+
+  <!-- ================= BACKGROUND CONTAINERS ================= -->
+
+  <!-- Cloudflare Anycast Global Edge Container -->
+  <g transform="translate(250, 30)">
+    <rect width="800" height="640" rx="12" fill="#FFFBF7" stroke="#F38020" stroke-width="2" stroke-dasharray="8 6" filter="url(#shadow)"/>
+    <rect width="800" height="40" rx="12" fill="#F38020"/>
+    <rect y="28" width="800" height="12" fill="#F38020"/>
+    <text x="24" y="26" fill="#FFFFFF" font-size="14" font-weight="700" letter-spacing="1">CLOUDFLARE ANYCAST GLOBAL EDGE (ZONE: CAMBRERA.NET)</text>
+  </g>
+
+  <!-- AWS Origin Container -->
+  <g transform="translate(1090, 30)">
+    <rect width="430" height="640" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" stroke-dasharray="8 6" filter="url(#shadow)"/>
+    <rect width="430" height="40" rx="12" fill="#334155"/>
+    <rect y="28" width="430" height="12" fill="#334155"/>
+    <text x="24" y="26" fill="#FFFFFF" font-size="14" font-weight="700" letter-spacing="1">AWS CLOUD ORIGIN (ZERO INGRESS)</text>
+  </g>
+
+  <!-- ================= CLIENT TIER (LEFT) ================= -->
+  <!-- End User -->
+  <g transform="translate(45, 230)">
+    <circle cx="40" cy="30" r="18" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+    <path d="M22 68 C22 50, 58 50, 58 68" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+    <text x="40" y="94" text-anchor="middle" font-size="13" font-weight="700" fill="#0F172A">End User</text>
+    <text x="40" y="110" text-anchor="middle" font-size="11" fill="#64748B">Browser / Client</text>
+  </g>
+
+  <!-- ================= CLOUDFLARE EDGE COMPONENTS ================= -->
+
+  <!-- 1. DNS Resolution (Globe with Lat/Long Grid) -->
+  <g transform="translate(290, 95)">
+    <rect width="160" height="105" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- Globe Icon -->
+    <g transform="translate(60, 10)">
+      <circle cx="20" cy="20" r="16" fill="#F8FAFC" stroke="#1E293B" stroke-width="2"/>
+      <ellipse cx="20" cy="20" rx="7" ry="16" fill="none" stroke="#F38020" stroke-width="2"/>
+      <line x1="20" y1="4" x2="20" y2="36" stroke="#1E293B" stroke-width="1.8"/>
+      <line x1="4" y1="20" x2="36" y2="20" stroke="#F38020" stroke-width="2"/>
+      <path d="M7 12 C12 14, 28 14, 33 12" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+      <path d="M7 28 C12 26, 28 26, 33 28" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    </g>
+    <text x="80" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">Cloudflare DNS</text>
+    <text x="80" y="84" text-anchor="middle" font-size="11" font-weight="600" fill="#F38020">cambrera.net</text>
+    <text x="80" y="96" text-anchor="middle" font-size="9" fill="#64748B">Authoritative Anycast</text>
+  </g>
+
+  <!-- 2. CDN / Tiered Cache -->
+  <g transform="translate(520, 95)">
+    <rect width="180" height="105" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- CDN Cloud Icon -->
+    <g transform="translate(70, 10)">
+      <path d="M26 14 C25 8, 16 6, 12 11 C8 9, 3 13, 4 18 C1 20, 1 26, 6 28 L32 28 C37 28, 38 22, 34 19 C35 16, 32 14, 26 14 Z" fill="#F38020" opacity="0.15"/>
+      <path d="M26 14 C25 8, 16 6, 12 11 C8 9, 3 13, 4 18 C1 20, 1 26, 6 28 L32 28 C37 28, 38 22, 34 19 C35 16, 32 14, 26 14 Z" fill="none" stroke="#F38020" stroke-width="2"/>
+      <line x1="12" y1="20" x2="26" y2="20" stroke="#1E293B" stroke-width="2"/>
+      <line x1="15" y1="24" x2="23" y2="24" stroke="#1E293B" stroke-width="2"/>
+    </g>
+    <text x="90" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">Cloudflare CDN / Proxy</text>
+    <text x="90" y="84" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">Smart Tiered Cache</text>
+    <text x="90" y="96" text-anchor="middle" font-size="9" fill="#64748B">Edge Caching &amp; TLS 1.3</text>
+  </g>
+
+  <!-- 3. Cloudflare Access -->
+  <g transform="translate(290, 260)">
+    <rect width="140" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- Access Shield Icon -->
+    <g transform="translate(50, 10)">
+      <path d="M20 4 L34 10 V20 C34 30, 20 38, 20 38 C20 38, 6 30, 6 20 V10 Z" fill="#FFF7ED" stroke="#F38020" stroke-width="2.2" stroke-linejoin="round"/>
+      <rect x="13" y="14" width="14" height="16" rx="2" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.5"/>
+      <circle cx="20" cy="19" r="2.5" fill="#1E293B"/>
+      <path d="M16 27 C16 24 18 23 20 23 C22 23 24 24 24 27" stroke="#1E293B" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <text x="70" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">Cloudflare Access</text>
+    <text x="70" y="86" text-anchor="middle" font-size="10" font-weight="600" fill="#DC2626">Zero Trust Engine</text>
+    <text x="70" y="100" text-anchor="middle" font-size="9" fill="#64748B">Policy Enforcement</text>
+  </g>
+
+  <!-- 4. Identity Provider (IdP) -->
+  <g transform="translate(460, 260)">
+    <rect width="140" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- IdP Directory Icon -->
+    <g transform="translate(50, 10)">
+      <rect x="6" y="8" width="28" height="26" rx="4" fill="#F8FAFC" stroke="#1E293B" stroke-width="2"/>
+      <rect x="6" y="8" width="28" height="8" rx="4" fill="#1E293B"/>
+      <circle cx="20" cy="23" r="3.5" fill="#2563EB"/>
+      <circle cx="28" cy="28" r="4" fill="#F38020"/>
+    </g>
+    <text x="70" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">Identity Provider</text>
+    <text x="70" y="86" text-anchor="middle" font-size="10" font-weight="600" fill="#2563EB">(IdP)</text>
+    <text x="70" y="100" text-anchor="middle" font-size="9" fill="#64748B">@cloudflare / Google</text>
+  </g>
+
+  <!-- 5. Landing Page: https://tunnel.cambrera.net/secure -->
+  <g transform="translate(635, 250)">
+    <rect width="220" height="140" rx="10" fill="#FFFFFF" stroke="#F38020" stroke-width="2" filter="url(#card-shadow)"/>
+    <rect width="220" height="30" rx="10" fill="#FFF7ED"/>
+    <rect y="20" width="220" height="10" fill="#FFF7ED"/>
+    <text x="110" y="20" text-anchor="middle" font-size="11" font-weight="800" fill="#EA580C">LANDING PAGE (Worker: flag_svc)</text>
+    
+    <text x="110" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0284C7">tunnel.cambrera.net/secure</text>
+    <text x="110" y="62" text-anchor="middle" font-size="9" fill="#64748B">Visitor Country &amp; Auth Badge</text>
+    
+    <!-- 3 Action Links Inside Landing Page Box -->
+    <rect x="12" y="72" width="196" height="19" rx="3" fill="#FFF7ED" stroke="#FDBA74"/>
+    <text x="110" y="85" text-anchor="middle" font-size="9.5" font-weight="700" fill="#C2410C">🔗 1. View Flag</text>
+
+    <rect x="12" y="95" width="196" height="19" rx="3" fill="#EFF6FF" stroke="#BFDBFE"/>
+    <text x="110" y="108" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8">🔗 2. View Headers w/ Auth</text>
+
+    <rect x="12" y="117" width="196" height="17" rx="3" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text x="110" y="129" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569">🔗 3. View Headers w/out Auth</text>
+  </g>
+
+  <!-- 6. Private R2 Storage Bucket -->
+  <g transform="translate(890, 260)">
+    <rect width="135" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- Cloudflare R2 Storage Bucket Icon -->
+    <g transform="translate(48, 10)">
+      <path d="M8 12 V32 C8 36 32 36 32 32 V12" fill="#FFF7ED" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+      <path d="M8 22 C8 26 32 26 32 22" stroke="#94A3B8" stroke-width="1.5"/>
+      <ellipse cx="20" cy="12" rx="12" ry="5" fill="#F38020" stroke="#1E293B" stroke-width="2"/>
+      <rect x="15" y="21" width="10" height="7" rx="1.5" fill="#F38020"/>
+      <text x="20" y="27" text-anchor="middle" font-size="5.5" font-weight="900" fill="#FFFFFF">R2</text>
+    </g>
+    <text x="67" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#1E293B">Private R2</text>
+    <text x="67" y="85" text-anchor="middle" font-size="10" font-weight="600" fill="#F38020">272 Flags</text>
+    <text x="67" y="99" text-anchor="middle" font-size="8.5" fill="#64748B">Worker Binding</text>
+  </g>
+
+  <!-- 7. Tunnel Edge Anchor / Anycast PoP -->
+  <g transform="translate(655, 480)">
+    <rect width="180" height="95" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <!-- Edge PoP Icon -->
+    <g transform="translate(70, 10)">
+      <rect x="6" y="8" width="28" height="22" rx="4" fill="#0284C7" opacity="0.15"/>
+      <rect x="6" y="8" width="28" height="22" rx="4" fill="none" stroke="#0284C7" stroke-width="2"/>
+      <circle cx="12" cy="19" r="2" fill="#0284C7"/>
+      <circle cx="20" cy="19" r="2" fill="#0284C7"/>
+      <circle cx="28" cy="19" r="2" fill="#0284C7"/>
+    </g>
+    <text x="90" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">Tunnel Edge Anchor</text>
+    <text x="90" y="78" text-anchor="middle" font-size="10" font-weight="600" fill="#0284C7">Cloudflare Anycast PoP</text>
+    <text x="90" y="90" text-anchor="middle" font-size="9" fill="#64748B">Terminates QUIC Stream</text>
+  </g>
+
+  <!-- ================= AWS ORIGIN COMPONENTS ================= -->
+
+  <!-- 1. AWS Security Group (Allow CF IPs / Drop Other) -->
+  <g transform="translate(1125, 95)">
+    <rect width="360" height="65" rx="8" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <text x="180" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#991B1B">AWS Security Group</text>
+    <text x="180" y="40" text-anchor="middle" font-size="11" font-weight="600" fill="#15803D">Allow Cloudflare IP Ranges (Port 443)</text>
+    <text x="180" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#DC2626">DROP ALL OTHER DIRECT TRAFFIC</text>
+  </g>
+
+  <!-- 2. AWS ALB (Public CDN Origin) -->
+  <g transform="translate(1125, 180)">
+    <rect width="360" height="75" rx="8" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <text x="180" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#6D28D9">AWS Application Load Balancer (ALB)</text>
+    <text x="180" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Public CDN Origin (www.cambrera.net)</text>
+    <text x="180" y="58" text-anchor="middle" font-size="10" fill="#6D28D9">ACM Cert: www-origin.cambrera.net</text>
+  </g>
+
+  <!-- 3. cloudflared Sidecar Daemon (Zero Trust Route) -->
+  <g transform="translate(1125, 290)">
+    <rect width="360" height="85" rx="8" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <text x="180" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0369A1">cloudflared Sidecar Daemon</text>
+    <text x="180" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Tunnel UUID: bafe27e6-f0e1</text>
+    <text x="180" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#0284C7">Outbound QUIC (UDP 7844) | Zero Ingress</text>
+    <text x="180" y="72" text-anchor="middle" font-size="9" fill="#64748B">Origin Cloaked from Public Scanners</text>
+  </g>
+
+  <!-- 4. HTTP-Echo Origin Container -->
+  <g transform="translate(1125, 470)">
+    <rect width="360" height="85" rx="8" fill="#FFEDD5" stroke="#F97316" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#C2410C">HTTP-Echo Application Container</text>
+    <text x="180" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Localhost:8080 (Elastic Beanstalk Backend)</text>
+    <text x="180" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#C2410C">Returns Request Headers JSON</text>
+    <text x="180" y="74" text-anchor="middle" font-size="9" fill="#64748B">Echoes Host, CF-Connecting-IP, Cookies</text>
+  </g>
+
+  <!-- AWS Origin Internal Routing -->
+  <!-- ALB forwards to container on port 80 -->
+  <path d="M1485 215 L1510 215 L1510 512 L1485 512" fill="none" stroke="#8B5CF6" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <rect x="1440" y="350" width="110" height="20" rx="3" fill="#EDE9FE"/>
+  <text x="1495" y="364" text-anchor="middle" font-size="8.5" font-weight="600" fill="#6D28D9">Forward Port 80</text>
+
+  <!-- cloudflared forwards directly to localhost:8080 (BYPASSING ALB!) -->
+  <path d="M1305 375 L1305 470" fill="none" stroke="#0284C7" stroke-width="2.5" marker-end="url(#arrow-cyan)"/>
+  <rect x="1205" y="410" width="200" height="24" rx="4" fill="#F0F9FF" stroke="#BAE6FD"/>
+  <text x="1305" y="426" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0369A1">Forward to localhost:8080 (Bypasses ALB)</text>
+
+  <!-- ================= CROSS-ZONE / EXTERNAL CONNECTIONS ================= -->
+
+  <!-- Flow 1: GET / (homepage allowed) -> DNS -> CDN -->
+  <path d="M120 260 L200 260 L200 145 L290 145" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="125" y="132" width="155" height="26" rx="4" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="202" y="149" text-anchor="middle" font-size="11" font-weight="700" fill="#1D4ED8">GET / (homepage allowed)</text>
+
+  <!-- DNS to CDN (Proxied CNAME) -->
+  <path d="M450 145 L520 145" fill="none" stroke="#F38020" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="460" y="132" width="50" height="18" rx="3" fill="#FFF7ED"/>
+  <text x="485" y="145" text-anchor="middle" font-size="9" font-weight="700" fill="#C2410C">CNAME</text>
+
+  <!-- CDN Proxy to AWS ALB (Public HTTPS Route) -->
+  <path d="M700 145 L1060 145 L1060 215 L1125 215" fill="none" stroke="#475569" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arrow-slate)"/>
+  <rect x="730" y="132" width="220" height="22" rx="4" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="840" y="147" text-anchor="middle" font-size="9" font-weight="600" fill="#475569">Public HTTPS (www.cambrera.net)</text>
+
+  <!-- Flow 2: GET /secure* -> Access -->
+  <path d="M120 280 L200 280 L200 315 L290 315" fill="none" stroke="#DC2626" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+  <rect x="140" y="302" width="125" height="26" rx="4" fill="#FEF2F2" stroke="#FECACA"/>
+  <text x="202" y="319" text-anchor="middle" font-size="11" font-weight="700" fill="#B91C1C">GET /secure*</text>
+
+  <!-- Access -> IDP Challenge -->
+  <path d="M430 315 L460 315" fill="none" stroke="#DC2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="445" y="307" text-anchor="middle" font-size="8" font-weight="700" fill="#B91C1C">Auth</text>
+
+  <!-- IDP -> Landing Page -->
+  <path d="M600 315 L635 315" fill="none" stroke="#16A34A" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="618" y="307" text-anchor="middle" font-size="8" font-weight="700" fill="#15803D">Session</text>
+
+  <!-- Landing Page Link 1: View Flag -> R2 Bucket -->
+  <path d="M855 315 L890 315" fill="none" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <text x="872" y="307" text-anchor="middle" font-size="8" font-weight="700" fill="#C2410C">1. Flag</text>
+
+  <!-- Landing Page Link 2: View Headers w/ Auth -> Tunnel Edge Anchor -->
+  <path d="M745 390 L745 480" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="753" y="420" width="145" height="22" rx="3" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="825" y="435" text-anchor="middle" font-size="9" font-weight="700" fill="#1D4ED8">2. View Headers w/ Auth</text>
+
+  <!-- Landing Page Link 3: View Headers w/out Auth -> CDN Cache / Open Endpoint -->
+  <path d="M700 250 L700 175 L690 175" fill="none" stroke="#64748B" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-slate)"/>
+  <rect x="670" y="200" width="140" height="20" rx="3" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="740" y="214" text-anchor="middle" font-size="8" font-weight="600" fill="#475569">3. View Headers w/out Auth</text>
+
+  <!-- PERSISTENT OUTBOUND-ONLY QUIC TUNNEL (Edge PoP to Daemon) -->
+  <path d="M835 527 L980 527 L980 332 L1125 332" fill="none" stroke="#0284C7" stroke-width="3" stroke-dasharray="8 5" marker-end="url(#arrow-cyan)"/>
+  <rect x="860" y="512" width="240" height="24" rx="4" fill="#F0F9FF" stroke="#BAE6FD"/>
+  <text x="980" y="528" text-anchor="middle" font-size="10" font-weight="700" fill="#0369A1">OUTBOUND QUIC TUNNEL (UDP 7844)</text>
+
+</svg>
