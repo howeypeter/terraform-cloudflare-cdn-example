@@ -19,7 +19,7 @@ The delivered infrastructure transforms legacy perimeter-based corporate access 
 ![Cloudflare Zero Trust Architecture](images/zero_trust_architecture.png)
 *Figure 1: Cloudflare Zero Trust Network Architecture (ZTNA) — Identity-Aware Access Applications, MockSAML SaaS IdP Federation, WARP Device Enrollment, and Gateway Threat Filtering.*
 
-### Core Technical Deliverables
+### Core Deliverables
 1. **Working Applications Secured by Cloudflare ZTNA**:
    - **Self-Hosted Application**: Deployed behind Cloudflare Tunnel and Access at [`tunnel.cambrera.net/testers*`](https://tunnel.cambrera.net/testers). Access is strictly restricted to the `Testers` identity group and whitelisted admin.
    - **SaaS Application**: Integrated SAML 2.0 application (`https://mocksaml.com`) where Cloudflare acts as the authoritative Identity Provider (IdP), restricting authentication to the `SaaS Users` identity group and whitelisted admin.
