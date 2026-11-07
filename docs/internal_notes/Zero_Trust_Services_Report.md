@@ -28,7 +28,7 @@ The delivered infrastructure transforms legacy perimeter-based corporate access 
    - **DNS Filtering**: Enforced DNS policies blocking Security Threat categories `68` (Anonymizers) and `117` (Malware), with explicit enforcement verified against `anonymizer.testcategory.com` and `malware.testcategory.com`.
    - **HTTP Filtering**: Enforced Secure Web Gateway (SWG) deep-packet filtering blocking Content categories `7` and `92` (Entertainment) while selectively permitting legitimate streaming infrastructure (`*.youtube.com`, `*.netflix.com`, `*.googlevideo.com`).
 3. **Infrastructure as Code (IaC)**:
-   - 100% codified using the official **Cloudflare Terraform Provider v5**, featuring dedicated, reusable modules ([`tf_zerotrust/`](file:///c:/Users/howey/OneDrive/Documents/Claude/Projects/terraform-cloudflare-cdn-example/tf_zerotrust)) with declarative `for_each` rule management.
+   - 100% codified using the official **Cloudflare Terraform Provider v5**, featuring dedicated, reusable modules ([`tf_zerotrust/`](../../tf_zerotrust)) with declarative `for_each` rule management.
 
 ---
 
@@ -145,7 +145,7 @@ resource "cloudflare_zero_trust_access_application" "samltest" {
 * **Application Name**: `WARP Device Enrollment`
 * **Application ID**: `e3b5a994-0355-488a-8ada-83c41fb17e5e`
 * **Requirement**: Ensure no one other than users defined in the IdP groups can enroll devices to the team organization.
-* **Implementation**: In Cloudflare Access, device onboarding is protected via a dedicated Access application of type `warp`. We codified this rule in [`infra/zero_trust/device_enrollment.tf`](file:///c:/Users/howey/OneDrive/Documents/Claude/Projects/terraform-cloudflare-cdn-example/infra/zero_trust/device_enrollment.tf), binding enrollment permission strictly to the `Testers` group, `SaaS Users` group, and the admin email.
+* **Implementation**: In Cloudflare Access, device onboarding is protected via a dedicated Access application of type `warp`. We codified this rule in [`infra/zero_trust/device_enrollment.tf`](../../infra/zero_trust/device_enrollment.tf), binding enrollment permission strictly to the `Testers` group, `SaaS Users` group, and the admin email.
 
 ```hcl
 # infra/zero_trust/device_enrollment.tf
@@ -173,7 +173,7 @@ resource "cloudflare_zero_trust_access_application" "warp_device_enrollment" {
 ---
 
 ### 5. Gateway - DNS & HTTP Filtering Module
-To ensure maintainability, all Gateway rules were modularized into [`tf_zerotrust`](file:///c:/Users/howey/OneDrive/Documents/Claude/Projects/terraform-cloudflare-cdn-example/tf_zerotrust) using a declarative map:
+To ensure maintainability, all Gateway rules were modularized into [`tf_zerotrust`](../../tf_zerotrust) using a declarative map:
 
 ```hcl
 # infra/zero_trust/gateway.tf calling module.gateway
@@ -256,7 +256,7 @@ module "gateway" {
 * **Deep Content Inspection (HTTP/SWG)**: For traffic passing DNS resolution, the HTTP Gateway policy enforces granular content categorization and SNI inspection, allowing targeted exemptions for business streaming while blocking recreational entertainment sites.
 
 ### 3. Declarative, Modular Infrastructure as Code
-* **Reusability**: Gateway policies are managed through a centralized, standalone module ([`tf_zerotrust/`](file:///c:/Users/howey/OneDrive/Documents/Claude/Projects/terraform-cloudflare-cdn-example/tf_zerotrust)) accepting a typed configuration map.
+* **Reusability**: Gateway policies are managed through a centralized, standalone module ([`tf_zerotrust/`](../../tf_zerotrust)) accepting a typed configuration map.
 * **Documentation as Code**: Variable schema and module documentation are auto-generated and validated using `terraform-docs`.
 
 ---

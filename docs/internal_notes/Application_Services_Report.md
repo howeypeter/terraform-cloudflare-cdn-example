@@ -14,11 +14,25 @@ This report documents the end-to-end architecture, implementation steps, and eng
 
 The delivered system is a production-grade, zero-trust hybrid architecture bridging public edge services and private enterprise backends:
 1. **Deliverable 1 (Live Application)**: A fully operational, zero-trust edge application served at `https://tunnel.cambrera.net/secure`. The application reflects authenticated user identity, timestamp, and ISO country metadata, linking to country flag assets served out of a private Cloudflare R2 bucket.
-2. **Deliverable 2 (Public Git Repository)**: The complete codebase—including the modular Terraform infrastructure, Wrangler Worker microservice, release packaging pipelines, and documentation—is published at [https://github.com/howeypeter/terraform-cloudflare-cdn-example](https://github.com/howeypeter/terraform-cloudflare-cdn-example).
+2. **Deliverable 2 (Public Git Repository)**: The complete codebase—including modular Terraform infrastructure, Wrangler Worker microservice, release packaging pipelines, and documentation—is published at [https://github.com/howeypeter/terraform-cloudflare-cdn-example](https://github.com/howeypeter/terraform-cloudflare-cdn-example).
 3. **Deliverable 3 (Written Report)**: This comprehensive document covering the technical implementation, verification evidence, enterprise use cases, self-learning discoveries, and target customer experience.
 
 ![Cloudflare Application Services Architecture](images/application_services_architecture.png)
 *Figure 1: Cloudflare Hybrid Application Architecture — Dual Ingress Paths (Public CDN vs. Zero Trust Access), Worker Country Resolution, and Outbound QUIC Origin Cloaking.*
+
+### System Functionality & Traffic Lifecycle Matrix
+
+The table below contrasts how unauthenticated and authenticated requests navigate the edge and origin tiers across all core routes:
+
+| Route & Intent | User (Unauthenticated) | User (Authenticated) | Cloudflare Edge Plane | Origin (AWS Cloud) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Public CDN**<br>`https://www.cambrera.net/` | Loads homepage directly. Full public access. | Loads homepage directly. Identical experience. | Anycast DNS resolves to nearest PoP. Enforces TLS 1.3 Strict, Brotli, and Tiered Cache. Proxies to AWS ALB. | AWS ALB terminates HTTPS (:443) via ACM cert. Security Group drops non-Cloudflare IPs. Forwards to container :80. |
+| **Open Tunnel Echo**<br>`https://tunnel.cambrera.net/` | Retrieves raw request headers JSON without auth. | Retrieves raw request headers JSON directly. | Edge routes root `/` through Cloudflare Tunnel (`bafe27e6-f0e1`) without Access challenge. | `cloudflared` daemon receives stream over outbound QUIC (UDP 7844) and proxies loopback to `localhost:8080`. Origin IP cloaked. |
+| **Protected Ingress**<br>`https://tunnel.cambrera.net/secure` | Intercepted at Edge. Redirected (302) to Cloudflare Access login screen. Origin untouched. | Evaluated by IdP policy (`@cloudflare.com` OTP / Google SSO). Issued signed `CF_Authorization` JWT cookie. | Cloudflare Access validates JWT, then executes **Cloudflare Worker (`flag_svc`)**. Injects preload header (`Link: <...>; rel=preload`). | **Completely Untouched**.<br>Landing page renders entirely at edge compute. Origin receives zero traffic. |
+| **Flag Resolution**<br>`/secure/:country` | Blocked at edge by Access policy. Zero origin reach. | Worker reads `CF-IPCountry` or path. Redirects (302) to immutable release path `/secure/build-.../<CC>.svg`. | Worker fetches SVG via native binding (`env.FLAGS_BUCKET`) from **Private R2 Storage (Origin)**. Caches in `caches.default`. | **Zero AWS Egress**.<br>Assets stored in Cloudflare R2, served globally with sub-millisecond edge cache hits. |
+| **Authenticated Headers**<br>`/secure/headers` | Blocked at edge by Access policy. Access Denied. | Passes Access validation with valid JWT session cookie. | Edge forwards request over persistent QUIC tunnel, injecting `cf-access-authenticated-user-email` and JWT assertion. | `cloudflared` receives stream, forwards to `localhost:8080`. Container serializes headers including Access identity. |
+
+---
 
 ---
 
