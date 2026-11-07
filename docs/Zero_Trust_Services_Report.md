@@ -16,38 +16,8 @@ This report provides the technical documentation and architectural design for th
 
 The delivered infrastructure transforms legacy perimeter-based corporate access into an identity-centric, context-aware **Zero Trust Network Architecture (ZTNA)**. In place of coarse, insecure corporate VPNs, Cloudflare acts as an intelligent unified edge enforcing strict identity verification, role-based access control (RBAC), device enrollment posture, and granular DNS/HTTP inspection.
 
-```mermaid
-flowchart TD
-  subgraph Endpoints["User & Device Layer"]
-    UserTester["Tester User<br/>(howey.peter+tester@gmail.com)"]
-    UserSaaS["SaaS User<br/>(howey.peter+saas@gmail.com)"]
-    UserAdmin["Admin User<br/>(howey.peter@gmail.com)"]
-    WARP["Cloudflare One WARP Client<br/>(shy-frog-17eb)"]
-  end
-
-  subgraph Edge["Cloudflare Anycast Global Edge"]
-    AccessWarp["Access App (type: warp)<br/>Device Enrollment Control"]
-    AccessSelfHosted["Access App: Self-Hosted<br/>tunnel.cambrera.net/testers*"]
-    AccessSaaS["Access App: SaaS IdP<br/>SAML 2.0 Identity Provider"]
-    GW_DNS["Gateway DNS Filter<br/>Malware (117) & Anonymizers (68)"]
-    GW_HTTP["Gateway HTTP Filter<br/>Block Entertainment (7, 92)<br/>Allow Netflix / YouTube / Googlevideo"]
-  end
-
-  subgraph Backends["Protected Workloads & Applications"]
-    SelfHostedOrigin["Self-Hosted App (Origin)<br/>via Cloudflare Tunnel (bafe27e6)"]
-    SaaSApp["SaaS App: MockSAML<br/>(SP: mocksaml.com)"]
-    Internet["Public Internet"]
-  end
-
-  Endpoints -->|1. Enroll WARP| AccessWarp
-  WARP -->|2. Encrypted Tunnel| GW_DNS
-  WARP -->|3. SWG Inspection| GW_HTTP
-  GW_HTTP -->|Allowed Streaming / Clean Traffic| Internet
-  UserTester -->|4. Access Self-Hosted| AccessSelfHosted
-  AccessSelfHosted -->|Validated JWT / Group: Testers| SelfHostedOrigin
-  UserSaaS -->|5. Access SaaS App| AccessSaaS
-  AccessSaaS -->|SAML 2.0 Assertion / Group: SaaS Users| SaaSApp
-```
+![Cloudflare Zero Trust Architecture](images/zero_trust_architecture.png)
+*Figure 1: Cloudflare Zero Trust Network Architecture (ZTNA) — Identity-Aware Access Applications, MockSAML SaaS IdP Federation, WARP Device Enrollment, and Gateway Threat Filtering.*
 
 ### Key Deliverables Delivered
 1. **Working Applications Secured by Cloudflare ZTNA**:

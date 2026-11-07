@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 700" width="1520" height="700" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.05"/>
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#EA580C"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16A34A"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8B5CF6"/>
+    </marker>
+  </defs>
+
+  <!-- ================= BACKGROUND CONTAINERS ================= -->
+
+  <!-- Container 1: Endpoints & Identities -->
+  <g transform="translate(30, 30)">
+    <rect width="320" height="640" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="8 6" filter="url(#shadow)"/>
+    <rect width="320" height="40" rx="12" fill="#475569"/>
+    <rect y="28" width="320" height="12" fill="#475569"/>
+    <text x="20" y="26" fill="#FFFFFF" font-size="13" font-weight="700" letter-spacing="0.5">USER &amp; DEVICE LAYER (IDENTITIES)</text>
+  </g>
+
+  <!-- Container 2: Cloudflare Global Edge -->
+  <g transform="translate(380, 30)">
+    <rect width="750" height="640" rx="12" fill="#FFFBF7" stroke="#F38020" stroke-width="2" stroke-dasharray="8 6" filter="url(#shadow)"/>
+    <rect width="750" height="40" rx="12" fill="#F38020"/>
+    <rect y="28" width="750" height="12" fill="#F38020"/>
+    <text x="24" y="26" fill="#FFFFFF" font-size="14" font-weight="700" letter-spacing="1">CLOUDFLARE ZERO TRUST ANYCAST EDGE (SHY-FROG-17EB)</text>
+  </g>
+
+  <!-- Container 3: Protected Workloads -->
+  <g transform="translate(1160, 30)">
+    <rect width="330" height="640" rx="12" fill="#F8FAFC" stroke="#334155" stroke-width="2" stroke-dasharray="8 6" filter="url(#shadow)"/>
+    <rect width="330" height="40" rx="12" fill="#334155"/>
+    <rect y="28" width="330" height="12" fill="#334155"/>
+    <text x="20" y="26" fill="#FFFFFF" font-size="13" font-weight="700" letter-spacing="0.5">PROTECTED WORKLOADS &amp; DESTINATIONS</text>
+  </g>
+
+  <!-- ================= TIER 1: USER & DEVICE CARDS ================= -->
+
+  <!-- Card 1: Admin User -->
+  <g transform="translate(50, 95)">
+    <rect width="280" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <circle cx="35" cy="35" r="16" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
+    <circle cx="35" cy="30" r="6" fill="#6D28D9"/>
+    <path d="M25 45 C25 40, 45 40, 45 45" fill="#6D28D9"/>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Admin User</text>
+    <text x="65" y="46" font-size="10" font-weight="600" fill="#6D28D9">howey.peter@gmail.com</text>
+    <text x="65" y="62" font-size="9" fill="#64748B">Full Organization Administrator</text>
+  </g>
+
+  <!-- Card 2: Tester User -->
+  <g transform="translate(50, 200)">
+    <rect width="280" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <circle cx="35" cy="35" r="16" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+    <circle cx="35" cy="30" r="6" fill="#0369A1"/>
+    <path d="M25 45 C25 40, 45 40, 45 45" fill="#0369A1"/>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">Tester Persona</text>
+    <text x="65" y="46" font-size="10" font-weight="600" fill="#0369A1">howey.peter+tester@gmail.com</text>
+    <text x="65" y="62" font-size="9" fill="#15803D">Member of: "Testers" Group</text>
+  </g>
+
+  <!-- Card 3: SaaS User -->
+  <g transform="translate(50, 305)">
+    <rect width="280" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <circle cx="35" cy="35" r="16" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+    <circle cx="35" cy="30" r="6" fill="#B45309"/>
+    <path d="M25 45 C25 40, 45 40, 45 45" fill="#B45309"/>
+    <text x="65" y="30" font-size="12" font-weight="700" fill="#0F172A">SaaS User Persona</text>
+    <text x="65" y="46" font-size="10" font-weight="600" fill="#B45309">howey.peter+saas@gmail.com</text>
+    <text x="65" y="62" font-size="9" fill="#D97706">Member of: "SaaS Users" Group</text>
+  </g>
+
+  <!-- Card 4: WARP Client -->
+  <g transform="translate(50, 430)">
+    <rect width="280" height="110" rx="8" fill="#FFFFFF" stroke="#0284C7" stroke-width="2" filter="url(#card-shadow)"/>
+    <rect x="15" y="15" width="40" height="30" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+    <rect x="25" y="38" width="20" height="4" fill="#0284C7"/>
+    <text x="65" y="32" font-size="12" font-weight="700" fill="#0F172A">Cloudflare One WARP</text>
+    <text x="65" y="48" font-size="10" font-weight="600" fill="#0284C7">Team Org: shy-frog-17eb</text>
+    <text x="65" y="64" font-size="9" fill="#64748B">WireGuard / BoringTun Tunnel</text>
+    <rect x="15" y="78" width="250" height="22" rx="4" fill="#F0F9FF" stroke="#BAE6FD"/>
+    <text x="140" y="93" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0369A1">🔒 Enrolled Managed Endpoint</text>
+  </g>
+
+  <!-- ================= TIER 2: CLOUDFLARE EDGE COMPONENTS ================= -->
+
+  <!-- Component 1: Device Enrollment Policy (type: warp) -->
+  <g transform="translate(410, 95)">
+    <rect width="320" height="85" rx="8" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <!-- Shield / Device Icon -->
+    <g transform="translate(18, 18)">
+      <path d="M15 2 L28 7 V15 C28 23 15 29 15 29 C15 29 2 23 2 15 V7 Z" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+      <path d="M9 14 L13 18 L21 10" fill="none" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text x="60" y="28" font-size="12" font-weight="700" fill="#0F172A">Device Enrollment App (WARP)</text>
+    <text x="60" y="44" font-size="10" font-weight="600" fill="#0284C7">Type: "warp" | ID: e3b5a994-0355</text>
+    <text x="60" y="60" font-size="9" fill="#15803D">Enforces: Admin + Whitelisted Group</text>
+    <text x="60" y="73" font-size="8.5" fill="#64748B">Zero Unauthorized Endpoint Registrations</text>
+  </g>
+
+  <!-- Component 2: Self-Hosted Access App (tunnel.cambrera.net/testers*) -->
+  <g transform="translate(410, 210)">
+    <rect width="320" height="95" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <g transform="translate(18, 20)">
+      <rect x="2" y="4" width="26" height="22" rx="3" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+      <path d="M8 15 L13 20 L22 10" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text x="60" y="26" font-size="12" font-weight="700" fill="#0F172A">Self-Hosted App (Access)</text>
+    <text x="60" y="42" font-size="10" font-weight="700" fill="#15803D">tunnel.cambrera.net/testers*</text>
+    <text x="60" y="58" font-size="9" fill="#0F172A">Policy: <tspan font-weight="700" fill="#15803D">Allow "Testers" Group</tspan> + Admin</text>
+    <text x="60" y="72" font-size="8.5" fill="#DC2626">Non-members receive HTTP 403 Forbidden</text>
+    <text x="60" y="85" font-size="8.5" fill="#64748B">Generates: CF_Authorization JWT Header</text>
+  </g>
+
+  <!-- Component 3: SaaS Access App (MockSAML IdP) -->
+  <g transform="translate(770, 210)">
+    <rect width="330" height="95" rx="8" fill="#FFFFFF" stroke="#F38020" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <g transform="translate(18, 20)">
+      <circle cx="15" cy="15" r="13" fill="#FFF7ED" stroke="#F38020" stroke-width="2"/>
+      <text x="15" y="19" text-anchor="middle" font-size="8" font-weight="800" fill="#C2410C">SAML</text>
+    </g>
+    <text x="60" y="26" font-size="12" font-weight="700" fill="#0F172A">SaaS Access App (SAML 2.0 IdP)</text>
+    <text x="60" y="42" font-size="10" font-weight="700" fill="#EA580C">SP: https://mocksaml.com</text>
+    <text x="60" y="58" font-size="9" fill="#0F172A">Policy: <tspan font-weight="700" fill="#EA580C">Allow "SaaS Users" Group</tspan> + Admin</text>
+    <text x="60" y="72" font-size="8.5" fill="#DC2626">Unauthorized users blocked at IdP</text>
+    <text x="60" y="85" font-size="8.5" fill="#64748B">Signs: SAML 2.0 Assertions (X.509)</text>
+  </g>
+
+  <!-- Component 4: Gateway DNS Filter -->
+  <g transform="translate(410, 420)">
+    <rect width="320" height="110" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <g transform="translate(18, 20)">
+      <circle cx="15" cy="15" r="13" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+      <text x="15" y="19" text-anchor="middle" font-size="9" font-weight="800" fill="#991B1B">DNS</text>
+    </g>
+    <text x="60" y="28" font-size="12" font-weight="700" fill="#0F172A">Gateway DNS Threat Filter</text>
+    <text x="60" y="44" font-size="10" font-weight="700" fill="#DC2626">Action: BLOCK (REFUSED / 0.0.0.0)</text>
+    <text x="60" y="60" font-size="9" fill="#0F172A">Category 117: <tspan font-weight="700" fill="#DC2626">Security Risks / Malware</tspan></text>
+    <text x="60" y="74" font-size="9" fill="#0F172A">Category 68: <tspan font-weight="700" fill="#DC2626">Anonymizers / Proxies</tspan></text>
+    <text x="60" y="88" font-size="8.5" fill="#64748B">Tested: malware / anonymizer.testcategory.com</text>
+  </g>
+
+  <!-- Component 5: Gateway HTTP Filter (SWG) -->
+  <g transform="translate(770, 420)">
+    <rect width="330" height="110" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <g transform="translate(18, 20)">
+      <circle cx="15" cy="15" r="13" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+      <text x="15" y="19" text-anchor="middle" font-size="9" font-weight="800" fill="#1D4ED8">HTTP</text>
+    </g>
+    <text x="60" y="28" font-size="12" font-weight="700" fill="#0F172A">Gateway HTTP SWG Filter</text>
+    <text x="60" y="44" font-size="10" font-weight="700" fill="#DC2626">BLOCK: Entertainment (Cat 7, 92)</text>
+    <text x="60" y="60" font-size="10" font-weight="700" fill="#16A34A">ALLOW: YouTube &amp; Netflix Exceptions</text>
+    <text x="60" y="76" font-size="8.5" fill="#0F172A">Allowed: *.youtube.com, *.netflix.com</text>
+    <text x="60" y="89" font-size="8.5" fill="#64748B">SNI / Host Header Deep Packet Inspection</text>
+  </g>
+
+  <!-- ================= TIER 3: PROTECTED WORKLOADS ================= -->
+
+  <!-- Workload 1: Self-Hosted App (Origin Container via Tunnel) -->
+  <g transform="translate(1185, 200)">
+    <rect width="280" height="105" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" filter="url(#card-shadow)"/>
+    <text x="140" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#15803D">Self-Hosted Origin Backend</text>
+    <text x="140" y="44" text-anchor="middle" font-size="10" font-weight="600" fill="#0F172A">Cloudflare Tunnel (bafe27e6-f0e1)</text>
+    <text x="140" y="60" text-anchor="middle" font-size="10" fill="#64748B">HTTP-Echo on localhost:8080</text>
+    <rect x="20" y="70" width="240" height="22" rx="4" fill="#DCFCE7"/>
+    <text x="140" y="85" text-anchor="middle" font-size="9.5" font-weight="700" fill="#15803D">Echoes CF_Authorization JWT</text>
+  </g>
+
+  <!-- Workload 2: SaaS Provider: MockSAML -->
+  <g transform="translate(1185, 330)">
+    <rect width="280" height="95" rx="8" fill="#FFFFFF" stroke="#EA580C" stroke-width="2" filter="url(#card-shadow)"/>
+    <text x="140" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#C2410C">SaaS Service Provider</text>
+    <text x="140" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">MockSAML.com</text>
+    <text x="140" y="60" text-anchor="middle" font-size="9.5" fill="#64748B">ACS: https://mocksaml.com/api/saml/sso</text>
+    <rect x="20" y="68" width="240" height="20" rx="4" fill="#FFF7ED"/>
+    <text x="140" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">Validates Cloudflare Signed XML</text>
+  </g>
+
+  <!-- Workload 3: Clean Web & Allowed Streaming -->
+  <g transform="translate(1185, 470)">
+    <rect width="280" height="95" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#card-shadow)"/>
+    <text x="140" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1D4ED8">Public Internet / SaaS</text>
+    <text x="140" y="44" text-anchor="middle" font-size="10" font-weight="600" fill="#16A34A">✔ YouTube, Netflix, Googlevideo</text>
+    <text x="140" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#DC2626">✖ Blocked: Spotify, Hulu, Twitch, Malware</text>
+    <text x="140" y="76" text-anchor="middle" font-size="8.5" fill="#64748B">Inspected via WARP Egress Anycast</text>
+  </g>
+
+  <!-- ================= FLOW CONNECTORS ================= -->
+
+  <!-- Flow 1: WARP Enrollment -->
+  <path d="M330 460 L410 140" fill="none" stroke="#0284C7" stroke-width="2.5" marker-end="url(#arrow-cyan)"/>
+  <rect x="330" y="270" width="85" height="22" rx="3" fill="#E0F2FE"/>
+  <text x="372" y="285" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0369A1">1. Enroll WARP</text>
+
+  <!-- Flow 2: Tester User -> Self-Hosted App -->
+  <path d="M330 242 L410 242" fill="none" stroke="#16A34A" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="370" y="235" text-anchor="middle" font-size="8.5" font-weight="700" fill="#15803D">Access</text>
+
+  <!-- Flow 3: Self-Hosted App -> Origin via Tunnel -->
+  <path d="M730 250 L1185 250" fill="none" stroke="#16A34A" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <rect x="880" y="238" width="180" height="22" rx="4" fill="#DCFCE7" stroke="#86EFAC"/>
+  <text x="970" y="253" text-anchor="middle" font-size="9" font-weight="700" fill="#15803D">QUIC Tunnel (Origin Cloaked)</text>
+
+  <!-- Flow 4: SaaS User -> SaaS App (MockSAML) -->
+  <path d="M330 345 L770 260" fill="none" stroke="#EA580C" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <text x="540" y="315" text-anchor="middle" font-size="9" font-weight="700" fill="#C2410C">SAML SSO Challenge</text>
+
+  <!-- Flow 5: SaaS App -> MockSAML SP -->
+  <path d="M1100 260 L1185 360" fill="none" stroke="#EA580C" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <text x="1145" y="300" text-anchor="middle" font-size="8.5" font-weight="700" fill="#C2410C">SAML Response</text>
+
+  <!-- Flow 6: WARP Client -> Gateway DNS Filter -->
+  <path d="M330 480 L410 480" fill="none" stroke="#DC2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="370" y="472" text-anchor="middle" font-size="8.5" font-weight="700" fill="#991B1B">DNS Query</text>
+
+  <!-- Flow 7: WARP Client -> Gateway HTTP SWG -->
+  <path d="M330 500 L770 500" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="550" y="492" text-anchor="middle" font-size="9" font-weight="700" fill="#1D4ED8">Encrypted HTTP Egress</text>
+
+  <!-- Flow 8: SWG -> Public Internet -->
+  <path d="M1100 500 L1185 500" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="1142" y="492" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1D4ED8">Allowed</text>
+
+</svg>
