@@ -1,139 +1,138 @@
 <mxfile host="app.diagrams.net" modified="2026-11-06T00:00:00.000Z" agent="Cloudflare Systems" version="21.0.0" type="device">
-  <diagram id="app-services-architecture" name="Application Services Architecture">
-    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+  <diagram id="app-services-clean" name="Application Services Architecture">
+    <mxGraphModel dx="1400" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="800" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
 
         <!-- ================= CONTAINER: CLOUDFLARE ================= -->
-        <mxCell id="cf_box" value="CLOUDFLARE ANYCAST GLOBAL EDGE" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 6;rounded=1;arcSize=8;fillColor=#FFFBF7;strokeColor=#F38020;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#F38020;startSize=36;collapsible=0;dropTarget=0;" vertex="1" parent="1">
-          <mxGeometry x="250" y="50" width="700" height="660" as="geometry"/>
+        <mxCell id="cf_box" value="CLOUDFLARE EDGE" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 6;rounded=1;arcSize=8;fillColor=#FFFBF7;strokeColor=#F38020;strokeWidth=2;fontStyle=1;fontSize=14;fontColor=#F38020;startSize=32;collapsible=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="60" width="560" height="580" as="geometry"/>
         </mxCell>
 
         <!-- ================= CONTAINER: AWS ORIGIN ================= -->
-        <mxCell id="aws_box" value="AWS CLOUD ORIGIN (ZERO INGRESS)" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 6;rounded=1;arcSize=8;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#334155;startSize=36;collapsible=0;dropTarget=0;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="50" width="480" height="660" as="geometry"/>
+        <mxCell id="aws_box" value="AWS ORIGIN (ZERO INGRESS)" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 6;rounded=1;arcSize=8;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontSize=14;fontColor=#334155;startSize=32;collapsible=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="900" y="60" width="380" height="580" as="geometry"/>
         </mxCell>
 
-        <!-- ================= USER / CLIENT ACTORS ================= -->
-        <mxCell id="user_client" value="End User / Client&#xa;(Browser / Reviewer)" style="shape=actor;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#475569;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="50" y="240" width="60" height="75" as="geometry"/>
+        <!-- ================= USERS ================= -->
+        <mxCell id="user_client" value="End User" style="shape=actor;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#475569;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="50" height="65" as="geometry"/>
         </mxCell>
 
-        <mxCell id="attacker_bot" value="Reconnaissance Bot&#xa;(Port Scan / Direct IP)" style="shape=actor;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#991B1B;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="50" y="580" width="50" height="65" as="geometry"/>
+        <mxCell id="attacker_bot" value="Attacker" style="shape=actor;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#991B1B;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="45" height="55" as="geometry"/>
         </mxCell>
 
-        <!-- ================= CLOUDFLARE COMPONENTS ================= -->
-        <!-- Cloudflare DNS -->
-        <mxCell id="node_dns" value="Cloudflare DNS / Zone&#xa;www.cambrera.net&#xa;tunnel.cambrera.net" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDwhLS0gT3V0ZXIgR2xvYmUgU3BoZXJlIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBzdHJva2U9IiMxRTI5M0IiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0iI0ZGRkZGRiIvPgogIAogIDwhLS0gQ2VudHJhbCBMb25naXR1ZGUgRWxsaXBzZSAoR3JpZCkgLS0+CiAgPGVsbGlwc2UgY3g9IjEyIiBjeT0iMTIiIHJ4PSI0LjUiIHJ5PSIxMCIgc3Ryb2tlPSIjRjM4MDIwIiBzdHJva2Utd2lkdGg9IjIiLz4KICAKICA8IS0tIFZlcnRpY2FsIEF4aXMgLS0+CiAgPGxpbmUgeDE9IjEyIiB5MT0iMiIgeDI9IjEyIiB5Mj0iMjIiIHN0cm9rZT0iIzFFMjkzQiIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KCiAgPCEtLSBFcXVhdG9yIExpbmUgLS0+CiAgPGxpbmUgeDE9IjIiIHkxPSIxMiIgeDI9IjIyIiB5Mj0iMTIiIHN0cm9rZT0iI0YzODAyMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgCiAgPCEtLSBOb3J0aGVybiBQYXJhbGxlbCAoTGF0aXR1ZGUgR3JpZCkgLS0+CiAgPHBhdGggZD0iTTQuMiA3LjIgQzcgOC41LCAxNyA4LjUsIDE5LjggNy4yIiBzdHJva2U9IiMxRTI5M0IiIHN0cm9rZS13aWR0aD0iMS44Ii8+CiAgCiAgPCEtLSBTb3V0aGVybiBQYXJhbGxlbCAoTGF0aXR1ZGUgR3JpZCkgLS0+CiAgPHBhdGggZD0iTTQuMiAxNi44IEM3IDE1LjUsIDE3IDE1LjUsIDE5LjggMTYuOCIgc3Ryb2tlPSIjMUUyOTNCIiBzdHJva2Utd2lkdGg9IjEuOCIvPgo8L3N2Zz4K;" vertex="1" parent="cf_box">
-          <mxGeometry x="80" y="60" width="54" height="54" as="geometry"/>
+        <!-- ================= CLOUDFLARE NODES ================= -->
+        <!-- DNS -->
+        <mxCell id="node_dns" value="Cloudflare DNS" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%3C%21--%20Outer%20Globe%20Sphere%20--%3E%0A%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%222%22%20fill%3D%22%23FFFFFF%22/%3E%0A%20%20%0A%20%20%3C%21--%20Central%20Longitude%20Ellipse%20%28Grid%29%20--%3E%0A%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%2212%22%20rx%3D%224.5%22%20ry%3D%2210%22%20stroke%3D%22%23F38020%22%20stroke-width%3D%222%22/%3E%0A%20%20%0A%20%20%3C%21--%20Vertical%20Axis%20--%3E%0A%20%20%3Cline%20x1%3D%2212%22%20y1%3D%222%22%20x2%3D%2212%22%20y2%3D%2222%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%221.8%22/%3E%0A%0A%20%20%3C%21--%20Equator%20Line%20--%3E%0A%20%20%3Cline%20x1%3D%222%22%20y1%3D%2212%22%20x2%3D%2222%22%20y2%3D%2212%22%20stroke%3D%22%23F38020%22%20stroke-width%3D%222%22/%3E%0A%20%20%0A%20%20%3C%21--%20Northern%20Parallel%20%28Latitude%20Grid%29%20--%3E%0A%20%20%3Cpath%20d%3D%22M4.2%207.2%20C7%208.5%2C%2017%208.5%2C%2019.8%207.2%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%221.8%22/%3E%0A%20%20%0A%20%20%3C%21--%20Southern%20Parallel%20%28Latitude%20Grid%29%20--%3E%0A%20%20%3Cpath%20d%3D%22M4.2%2016.8%20C7%2015.5%2C%2017%2015.5%2C%2019.8%2016.8%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%221.8%22/%3E%0A%3C/svg%3E%0A;" vertex="1" parent="cf_box">
+          <mxGeometry x="60" y="50" width="56" height="56" as="geometry"/>
         </mxCell>
 
-        <!-- Cloudflare CDN / Proxy -->
-        <mxCell id="node_cdn" value="Cloudflare CDN / Proxy&#xa;(Smart Tiered Cache &amp; TLS 1.3)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDA1MWMzIiB2aWV3Qm94PSIwIDAgNDggNDgiPg0KICA8cGF0aCBkPSJNMzcuMTI1IDIyLjIyN2ExLjU2OSAxLjU2OSAwIDEgMCAwLTMuMTM4IDEuNTY5IDEuNTY5IDAgMCAwIDAgMy4xMzhaIi8+DQogIDxwYXRoIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTExLjU5IDYuNTUgMTIuNzUgNmgyMi41bDEuMTYuNTUgNi43NSA4LjI1LjM0Ljk1di40MTlsLjAwNi4wMDV2OS42NGwtMS41IDEuNUg2bC0xLjUtMS41VjE1Ljc1bC4zNC0uOTUgNi43NS04LjI1Wk03LjUgMTcuNjc0djYuNjRoMzMuMDA2VjE4Ljc1SDQwLjV2LTEuMDc2aC0zM1ptMzEuNjgyLTNIOC44MThMMTMuNDYxIDloMjEuMDc4bDQuNjQzIDUuNjc1WiIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogIDxwYXRoIGQ9Ik0zNy4xMjUgMzYuOTA3YTEuNTY5IDEuNTY5IDAgMSAwIDAtMy4xMzggMS41NjkgMS41NjkgMCAwIDAgMCAzLjEzOVoiLz4NCiAgPHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNiAyOS4zNTUtMS41IDEuNXY5LjYzOWwxLjUgMS41aDM2LjAwNmwxLjUtMS41di05LjYzOWwtMS41LTEuNUg2Wm0xLjUgOS42Mzl2LTYuNjM5aDMzLjAwNnY2LjYzOUg3LjVaIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCjwvc3ZnPg==;" vertex="1" parent="cf_box">
-          <mxGeometry x="320" y="60" width="54" height="54" as="geometry"/>
+        <!-- CDN / Cache -->
+        <mxCell id="node_cdn" value="Cloudflare CDN" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%0A%20%20%3C%21--%20Cloudflare%20Cloud%20Base%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%284%2C%206%29%20scale%280.07%29%22%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23F38020%22%20d%3D%22M542.4%20207.4c-11.6%200-22.7%202.1-33.1%205.9-15.6-44.8-58.5-77.2-109.2-77.2-24.1%200-46.5%207.4-65%2020.1-12.8-19.3-34.7-32-59.5-32-39.7%200-72%2032.3-72%2072%200%203.3.3%206.6.8%209.8C85.5%20220.8%2048%20262.8%2048%20313.3c0%2056.6%2046.1%20102.7%20102.7%20102.7h391.7c56.6%200%20102.7-46.1%20102.7-102.7%200-56.6-46.1-105.9-102.7-105.9z%22/%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23FAAE40%22%20d%3D%22M410.8%20139.7c-9.7-.7-19.6.5-29.4%203.6-1.5%206.7-2.7%2013.5-3.6%2020.5%209.7-2.9%2019.5-4.2%2029.3-3.6%201.3-6.8%202.5-13.7%203.7-20.5z%22/%3E%0A%20%20%3C/g%3E%0A%0A%20%20%3C%21--%20Edge%20Content%20Delivery%20/%20Cache%20Network%20Nodes%20--%3E%0A%20%20%3Cg%20stroke%3D%22%231E293B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%3C%21--%20Distribution%20Rays%20from%20Edge%20Cloud%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M22%2036%20L14%2048%22%20stroke%3D%22%23F38020%22%20stroke-dasharray%3D%222%202%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M32%2036%20L32%2048%22%20stroke%3D%22%23F38020%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M42%2036%20L50%2048%22%20stroke%3D%22%23F38020%22%20stroke-dasharray%3D%222%202%22/%3E%0A%0A%20%20%20%20%3C%21--%20Interconnected%20Regional%20Edge%20Cache%20Points%20--%3E%0A%20%20%20%20%3Cline%20x1%3D%2214%22%20y1%3D%2248%22%20x2%3D%2232%22%20y2%3D%2248%22%20stroke%3D%22%2394A3B8%22/%3E%0A%20%20%20%20%3Cline%20x1%3D%2232%22%20y1%3D%2248%22%20x2%3D%2250%22%20y2%3D%2248%22%20stroke%3D%22%2394A3B8%22/%3E%0A%0A%20%20%20%20%3Ccircle%20cx%3D%2214%22%20cy%3D%2248%22%20r%3D%224%22%20fill%3D%22%23FFF7ED%22%20stroke%3D%22%23F38020%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2248%22%20r%3D%224%22%20fill%3D%22%23F38020%22%20stroke%3D%22%231E293B%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2248%22%20r%3D%224%22%20fill%3D%22%23FFF7ED%22%20stroke%3D%22%23F38020%22%20stroke-width%3D%222%22/%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E%0A;" vertex="1" parent="cf_box">
+          <mxGeometry x="250" y="50" width="56" height="56" as="geometry"/>
         </mxCell>
 
-        <!-- Cloudflare Access (IdP Engine) -->
-        <mxCell id="node_access" value="Cloudflare Access / IdP&#xa;(@cloudflare.com + OTP/Google)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBhcmlhLWhpZGRlbj0idHJ1ZSIgY2xhc3M9ImNfYSBjX2IgY19jIGNfZCIgZmlsbD0iIzAwNTFjMyIgcm9sZT0icHJlc2VudGF0aW9uIiB2aWV3Qm94PSIwIDAgMTYgMTYiPg0KICA8cGF0aCBkPSJNOS4yIDIuNjk4YTUuMjk4IDUuMjk4IDAgMDAtNS4wNCAzLjY1N2wtLjAzNS4xMUg1LjFsLjAyMi0uMDUyYTQuMzc1IDQuMzc1IDAgMTEuMzA4IDMuODM1bC0uMDUtLjA4OEg0LjM1OGwuMDYuMTIzQTUuMzAzIDUuMzAzIDAgMTA5LjIgMi42OTh6Ii8+DQogIDxwYXRoIGQ9Ik05LjQ0NyA3LjI3Mkw3LjU5IDUuNDE1bC0uNjE3LjYxNyAxLjA4IDEuMDgzSDBsLjUyLjg3Mmg4LjYzbC4yOTctLjcxNXpNOS40MzUgMTEuMjEzbC0uNjE4LS42MTggMS4wOC0xLjA4MkgxLjQyNWwtLjUxOC0uODc1aDEwLjA4OGwuMjk4LjcxNy0xLjg1OCAxLjg1N3oiLz4NCjwvc3ZnPg==;" vertex="1" parent="cf_box">
-          <mxGeometry x="80" y="260" width="54" height="54" as="geometry"/>
+        <!-- Access (IdP) -->
+        <mxCell id="node_access" value="Cloudflare Access" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20aria-hidden%3D%22true%22%20class%3D%22c_a%20c_b%20c_c%20c_d%22%20fill%3D%22%230051c3%22%20role%3D%22presentation%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%20%20%3Cpath%20d%3D%22M9.2%202.698a5.298%205.298%200%2000-5.04%203.657l-.035.11H5.1l.022-.052a4.375%204.375%200%2011.308%203.835l-.05-.088H4.358l.06.123A5.303%205.303%200%20109.2%202.698z%22/%3E%0A%20%20%3Cpath%20d%3D%22M9.447%207.272L7.59%205.415l-.617.617%201.08%201.083H0l.52.872h8.63l.297-.715zM9.435%2011.213l-.618-.618%201.08-1.082H1.425l-.518-.875h10.088l.298.717-1.858%201.857z%22/%3E%0A%3C/svg%3E;" vertex="1" parent="cf_box">
+          <mxGeometry x="60" y="220" width="56" height="56" as="geometry"/>
         </mxCell>
 
-        <!-- Cloudflare Worker -->
-        <mxCell id="node_worker" value="Cloudflare Worker&#xa;(code/flag_svc V8 Isolate)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDA1MWMzIiB2aWV3Qm94PSIwIDAgNDggNDkiPg0KICA8cGF0aCBkPSJtMTguNjMgMzcuNDE4LTkuNjQ1LTEyLjkgOS41OTItMTIuNTMzLTEuODUyLTIuNTI3TDUuOTE3IDIzLjU5NWwtLjAxNSAxLjgwOCAxMC44NiAxNC41NDIgMS44NjgtMi41MjdaIi8+DQogIDxwYXRoIGQ9Ik0yMS45OTcgNi41MDNoLTMuNzEybDEzLjM4NyAxOC4zLTEzLjA3MiAxNy43aDMuNzM1TDM1LjQgMjQuODEgMjEuOTk3IDYuNTAzWiIvPg0KICA8cGF0aCBkPSJNMjkuMTc1IDYuNTAzaC0zLjc1OGwxMy41OTggMTguMDgyLTEzLjU5OCAxNy45MThoMy43NjVsMTIuOTA4LTE3LjAxdi0xLjgwOEwyOS4xNzUgNi41MDNaIi8+DQo8L3N2Zz4=;" vertex="1" parent="cf_box">
-          <mxGeometry x="320" y="260" width="54" height="54" as="geometry"/>
+        <!-- Worker -->
+        <mxCell id="node_worker" value="Worker (flag_svc)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%230051c3%22%20viewBox%3D%220%200%2048%2049%22%3E%0A%20%20%3Cpath%20d%3D%22m18.63%2037.418-9.645-12.9%209.592-12.533-1.852-2.527L5.917%2023.595l-.015%201.808%2010.86%2014.542%201.868-2.527Z%22/%3E%0A%20%20%3Cpath%20d%3D%22M21.997%206.503h-3.712l13.387%2018.3-13.072%2017.7h3.735L35.4%2024.81%2021.997%206.503Z%22/%3E%0A%20%20%3Cpath%20d%3D%22M29.175%206.503h-3.758l13.598%2018.082-13.598%2017.918h3.765l12.908-17.01v-1.808L29.175%206.503Z%22/%3E%0A%3C/svg%3E;" vertex="1" parent="cf_box">
+          <mxGeometry x="250" y="220" width="56" height="56" as="geometry"/>
         </mxCell>
 
-        <!-- Private R2 Bucket -->
-        <mxCell id="node_r2" value="Private R2 Bucket&#xa;(272 Country Flag SVGs)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBhcmlhLWhpZGRlbj0idHJ1ZSIgY2xhc3M9ImNfYSBjX2IgY19jIGNfZCIgZmlsbD0iIzAwNTFjMyIgcm9sZT0icHJlc2VudGF0aW9uIiB2aWV3Qm94PSIwIDAgMTYgMTYiPg0KICA8cGF0aCBkPSJNMTIuMTE2IDIuNTdjLS45NzMtLjMyNi0yLjM4NC0uNTQ2LTMuOTkxLS41NDYtMS42MDcgMC0zLjAxOC4yMi0zLjk5LjU0NS0uNDkyLjE2NC0uODE0LjMzNy0uOTkyLjQ3OGEuODkuODkgMCAwMC0uMDgyLjA3MmMuMDIuMDY5LjA3OC4xNTguMjI1LjI2OC4yMS4xNTguNTQ4LjMxMyAxLjAyNS40NDguOTQ3LjI2NiAyLjI5Mi40MDkgMy44MTQuNDA5IDEuNTIyIDAgMi44NjctLjE0MyAzLjgxNC0uNDEuNDc3LS4xMzQuODE2LS4yOSAxLjAyNS0uNDQ3LjE0Ny0uMTEuMjA0LS4yLjIyNS0uMjY4YS44ODQuODg0IDAgMDAtLjA4Mi0uMDcyYy0uMTc4LS4xNDEtLjUtLjMxNC0uOTkxLS40Nzh6TTQuMDIgNC44MThhNS4xOCA1LjE4IDAgMDEtLjk3LS4zNjl2MS43NTdjMCAuMDc5LjAzOS4yMDYuMjUuMzc3LjIxNC4xNzMuNTU2LjM0NyAxLjAzLjUuOTQ0LjMwNiAyLjI4NC40OSAzLjc5NS40OSAxLjUxIDAgMi44NS0uMTg0IDMuNzk0LS40OS40NzQtLjE1My44MTctLjMyNyAxLjAzLS41LjIxMi0uMTcxLjI1MS0uMjk4LjI1MS0uMzc3VjQuNDVhNS4xOCA1LjE4IDAgMDEtLjk3LjM2OWMtMS4wOC4zMDQtMi41MzQuNDUtNC4xMDUuNDUtMS41NzEgMC0zLjAyNi0uMTQ2LTQuMTA1LS40NXptMTAuMjMgMS4zODhWMy4wNUMxNC4yNSAxLjkxNyAxMS41MDggMSA4LjEyNSAxUzIgMS45MTcgMiAzLjA0OVYxMi45NUMyIDE0LjA4MyA0Ljc0MiAxNSA4LjEyNSAxNXM2LjEyNS0uOTE3IDYuMTI1LTIuMDQ5VjYuMjA3ek0xMy4yIDcuNjU0Yy0uMjguMTU3LS42MDIuMjktLjk1LjQwMy0xLjA4My4zNS0yLjU0My41NC00LjEyNS41NC0xLjU4MiAwLTMuMDQyLS4xOS00LjEyNS0uNTRhNS4yNTggNS4yNTggMCAwMS0uOTUtLjQwM3YxLjcxMmMwIC4wNzguMDM5LjIwNS4yNS4zNzYuMjE0LjE3My41NTYuMzQ4IDEuMDMuNTAxLjk0NC4zMDYgMi4yODQuNDg5IDMuNzk1LjQ4OSAxLjUxIDAgMi44NS0uMTgzIDMuNzk0LS40ODkuNDc0LS4xNTMuODE3LS4zMjggMS4wMy0uNS4yMTItLjE3Mi4yNTEtLjI5OS4yNTEtLjM3N1Y3LjY1NHpNNCAxMS4yMTVhNS4yNTMgNS4yNTMgMCAwMS0uOTUtLjQwM3YyLjA1OGMuMDE4LjAxOS4wNDcuMDQ2LjA5My4wODMuMTc4LjE0MS41LjMxNC45OTIuNDc4Ljk3Mi4zMjUgMi4zODMuNTQ1IDMuOTkuNTQ1IDEuNjA3IDAgMy4wMTgtLjIyIDMuOTktLjU0NS40OTItLjE2NC44MTQtLjMzNy45OTItLjQ3OGEuODA5LjgwOSAwIDAwLjA5My0uMDgzdi0yLjA1OGE1LjI1IDUuMjUgMCAwMS0uOTUuNDAzYy0xLjA4My4zNTEtMi41NDMuNTQxLTQuMTI1LjU0MS0xLjU4MiAwLTMuMDQyLS4xOS00LjEyNS0uNTR6bTkuMjI0IDEuNjI0czAgLjAwMi0uMDA0LjAwNmEuMDI4LjAyOCAwIDAxLjAwNC0uMDA2em0tMTAuMTk4IDBsLjAwNC4wMDZhLjAyNC4wMjQgMCAwMS0uMDA0LS4wMDZ6bTEuNTk5LTYuMjljLjI5IDAgLjUyNS0uMjMuNTI1LS41MTJhLjUxOS41MTkgMCAwMC0uNTI1LS41MTNjLS4yOSAwLS41MjUuMjMtLjUyNS41MTMgMCAuMjgyLjIzNS41MTIuNTI1LjUxMnpNNS4xNSA5LjI4YS41MTkuNTE5IDAgMDEtLjUyNS41MTMuNTE5LjUxOSAwIDAxLS41MjUtLjUxM2MwLS4yODIuMjM1LS41MTIuNTI1LS41MTIuMjkgMCAuNTI1LjIzLjUyNS41MTJ6bS0uNTI1IDMuNjcxYy4yOSAwIC41MjUtLjIzLjUyNS0uNTEyYS41MTkuNTE5IDAgMDAtLjUyNS0uNTEyYy0uMjkgMC0uNTI1LjIzLS41MjUuNTEyIDAgLjI4My4yMzUuNTEyLjUyNS41MTJ6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCjwvc3ZnPg==;" vertex="1" parent="cf_box">
-          <mxGeometry x="540" y="260" width="54" height="54" as="geometry"/>
+        <!-- R2 -->
+        <mxCell id="node_r2" value="Private R2 Bucket" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20aria-hidden%3D%22true%22%20class%3D%22c_a%20c_b%20c_c%20c_d%22%20fill%3D%22%230051c3%22%20role%3D%22presentation%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%20%20%3Cpath%20d%3D%22M12.116%202.57c-.973-.326-2.384-.546-3.991-.546-1.607%200-3.018.22-3.99.545-.492.164-.814.337-.992.478a.89.89%200%2000-.082.072c.02.069.078.158.225.268.21.158.548.313%201.025.448.947.266%202.292.409%203.814.409%201.522%200%202.867-.143%203.814-.41.477-.134.816-.29%201.025-.447.147-.11.204-.2.225-.268a.884.884%200%2000-.082-.072c-.178-.141-.5-.314-.991-.478zM4.02%204.818a5.18%205.18%200%2001-.97-.369v1.757c0%20.079.039.206.25.377.214.173.556.347%201.03.5.944.306%202.284.49%203.795.49%201.51%200%202.85-.184%203.794-.49.474-.153.817-.327%201.03-.5.212-.171.251-.298.251-.377V4.45a5.18%205.18%200%2001-.97.369c-1.08.304-2.534.45-4.105.45-1.571%200-3.026-.146-4.105-.45zm10.23%201.388V3.05C14.25%201.917%2011.508%201%208.125%201S2%201.917%202%203.049V12.95C2%2014.083%204.742%2015%208.125%2015s6.125-.917%206.125-2.049V6.207zM13.2%207.654c-.28.157-.602.29-.95.403-1.083.35-2.543.54-4.125.54-1.582%200-3.042-.19-4.125-.54a5.258%205.258%200%2001-.95-.403v1.712c0%20.078.039.205.25.376.214.173.556.348%201.03.501.944.306%202.284.489%203.795.489%201.51%200%202.85-.183%203.794-.489.474-.153.817-.328%201.03-.5.212-.172.251-.299.251-.377V7.654zM4%2011.215a5.253%205.253%200%2001-.95-.403v2.058c.018.019.047.046.093.083.178.141.5.314.992.478.972.325%202.383.545%203.99.545%201.607%200%203.018-.22%203.99-.545.492-.164.814-.337.992-.478a.809.809%200%2000.093-.083v-2.058a5.25%205.25%200%2001-.95.403c-1.083.351-2.543.541-4.125.541-1.582%200-3.042-.19-4.125-.54zm9.224%201.624s0%20.002-.004.006a.028.028%200%2001.004-.006zm-10.198%200l.004.006a.024.024%200%2001-.004-.006zm1.599-6.29c.29%200%20.525-.23.525-.512a.519.519%200%2000-.525-.513c-.29%200-.525.23-.525.513%200%20.282.235.512.525.512zM5.15%209.28a.519.519%200%2001-.525.513.519.519%200%2001-.525-.513c0-.282.235-.512.525-.512.29%200%20.525.23.525.512zm-.525%203.671c.29%200%20.525-.23.525-.512a.519.519%200%2000-.525-.512c-.29%200-.525.23-.525.512%200%20.283.235.512.525.512z%22%20fill-rule%3D%22evenodd%22/%3E%0A%3C/svg%3E;" vertex="1" parent="cf_box">
+          <mxGeometry x="430" y="220" width="56" height="56" as="geometry"/>
         </mxCell>
 
-        <!-- Cloudflare Tunnel Anycast Edge Ingress -->
-        <mxCell id="node_edge_tunnel" value="Cloudflare Anycast PoP&#xa;(Tunnel Edge Ingress)" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=11;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0IiBmaWxsPSJub25lIj4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0LCAxMikgc2NhbGUoMC4wNykiPgogICAgPHBhdGggZmlsbD0iI0YzODAyMCIgZD0iTTU0Mi40IDIwNy40Yy0xMS42IDAtMjIuNyAyLjEtMzMuMSA1LjktMTUuNi00NC44LTU4LjUtNzcuMi0xMDkuMi03Ny4yLTI0LjEgMC00Ni41IDcuNC02NSAyMC4xLTEyLjgtMTkuMy0zNC43LTMyLTU5LjUtMzItMzkuNyAwLTcyIDMyLjMtNzIgNzIgMCAzLjMuMyA2LjYuOCA5LjhDODUuNSAyMjAuOCA0OCAyNjIuOCA0OCAzMTMuM2MwIDU2LjYgNDYuMSAxMDIuNyAxMDIuNyAxMDIuN2gzOTEuN2M1Ni42IDAgMTAyLjctNDYuMSAxMDIuNy0xMDIuNyAwLTU2LjYtNDYuMS0xMDUuOS0xMDIuNy0xMDUuOXoiLz4KICAgIDxwYXRoIGZpbGw9IiNGQUFFNDAiIGQ9Ik00MTAuOCAxMzkuN2MtOS43LS43LTE5LjYuNS0yOS40IDMuNi0xLjUgNi43LTIuNyAxMy41LTMuNiAyMC41IDkuNy0yLjkgMTkuNS00LjIgMjkuMy0zLjYgMS4zLTYuOCAyLjUtMTMuNyAzLjctMjAuNXoiLz4KICA8L2c+Cjwvc3ZnPgo=;" vertex="1" parent="cf_box">
-          <mxGeometry x="320" y="470" width="60" height="42" as="geometry"/>
+        <!-- Tunnel Anchor -->
+        <mxCell id="node_edge_tunnel" value="Tunnel Edge Anchor" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;align=center;imageAspect=0;aspect=fixed;fontSize=12;fontStyle=1;fontColor=#1E293B;image=data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%0A%20%20%3Cg%20transform%3D%22translate%284%2C%2012%29%20scale%280.07%29%22%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23F38020%22%20d%3D%22M542.4%20207.4c-11.6%200-22.7%202.1-33.1%205.9-15.6-44.8-58.5-77.2-109.2-77.2-24.1%200-46.5%207.4-65%2020.1-12.8-19.3-34.7-32-59.5-32-39.7%200-72%2032.3-72%2072%200%203.3.3%206.6.8%209.8C85.5%20220.8%2048%20262.8%2048%20313.3c0%2056.6%2046.1%20102.7%20102.7%20102.7h391.7c56.6%200%20102.7-46.1%20102.7-102.7%200-56.6-46.1-105.9-102.7-105.9z%22/%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23FAAE40%22%20d%3D%22M410.8%20139.7c-9.7-.7-19.6.5-29.4%203.6-1.5%206.7-2.7%2013.5-3.6%2020.5%209.7-2.9%2019.5-4.2%2029.3-3.6%201.3-6.8%202.5-13.7%203.7-20.5z%22/%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E%0A;" vertex="1" parent="cf_box">
+          <mxGeometry x="250" y="410" width="56" height="40" as="geometry"/>
         </mxCell>
 
-        <!-- ================= AWS ORIGIN COMPONENTS ================= -->
-        <!-- AWS Security Group (Zero Ingress Boundary) -->
-        <mxCell id="node_secgroup" value="AWS Security Group&#xa;(Zero Inbound Ingress / Dropped)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#991B1B;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
-          <mxGeometry x="40" y="60" width="220" height="50" as="geometry"/>
+        <!-- ================= AWS NODES ================= -->
+        <!-- Security Group -->
+        <mxCell id="node_secgroup" value="Security Group&#xa;(No Inbound)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#991B1B;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
+          <mxGeometry x="50" y="55" width="160" height="45" as="geometry"/>
         </mxCell>
 
-        <!-- cloudflared Sidecar Daemon -->
-        <mxCell id="node_cloudflared" value="cloudflared Sidecar Daemon&#xa;(Tunnel UUID: bafe27e6-f0e1)&#xa;Outbound QUIC (UDP 7844)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#0369A1;fillColor=#E0F2FE;strokeColor=#0284C7;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
-          <mxGeometry x="40" y="250" width="220" height="70" as="geometry"/>
+        <!-- cloudflared -->
+        <mxCell id="node_cloudflared" value="cloudflared Daemon&#xa;(Outbound QUIC)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#0369A1;fillColor=#E0F2FE;strokeColor=#0284C7;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
+          <mxGeometry x="50" y="220" width="160" height="55" as="geometry"/>
         </mxCell>
 
-        <!-- AWS Application Load Balancer -->
-        <mxCell id="node_alb" value="AWS Application Load Balancer&#xa;(HTTPS:443 Internal ALB)&#xa;ACM Cert: www-origin" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#6D28D9;fillColor=#EDE9FE;strokeColor=#8B5CF6;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
-          <mxGeometry x="40" y="380" width="220" height="60" as="geometry"/>
+        <!-- ALB -->
+        <mxCell id="node_alb" value="AWS ALB" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#6D28D9;fillColor=#EDE9FE;strokeColor=#8B5CF6;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
+          <mxGeometry x="50" y="340" width="160" height="45" as="geometry"/>
         </mxCell>
 
-        <!-- HTTP-Echo Application Container -->
-        <mxCell id="node_echo" value="HTTP-Echo App Container&#xa;(Elastic Beanstalk Backend)&#xa;Returns Request Headers JSON" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#C2410C;fillColor=#FFEDD5;strokeColor=#F97316;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
-          <mxGeometry x="40" y="500" width="220" height="60" as="geometry"/>
+        <!-- HTTP-Echo -->
+        <mxCell id="node_echo" value="HTTP-Echo App" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontColor=#C2410C;fillColor=#FFEDD5;strokeColor=#F97316;strokeWidth=2;align=center;" vertex="1" parent="aws_box">
+          <mxGeometry x="50" y="450" width="160" height="45" as="geometry"/>
         </mxCell>
 
-        <!-- ================= CONNECTOR LINES & LABELS ================= -->
-
+        <!-- ================= CONNECTORS ================= -->
         <!-- 1. User -> DNS -->
-        <mxCell id="edge_dns" value="1. DNS Query&#xa;(cambrera.net)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.2;entryX=0;entryY=0.5;" edge="1" parent="1" source="user_client" target="node_dns">
+        <mxCell id="edge_dns" value="1. DNS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.2;entryX=0;entryY=0.5;" edge="1" parent="1" source="user_client" target="node_dns">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 2. DNS -> CDN Proxy -->
-        <mxCell id="edge_dns_cdn" value="Proxied CNAME" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F38020;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="cf_box" source="node_dns" target="node_cdn">
+        <!-- DNS -> CDN -->
+        <mxCell id="edge_dns_cdn" value="Proxy" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#F38020;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="cf_box" source="node_dns" target="node_cdn">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 3. User -> Access Challenge -->
-        <mxCell id="edge_user_access" value="2. GET /secure&#xa;(302 Challenge)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="user_client" target="node_access">
+        <!-- 2. User -> Access -->
+        <mxCell id="edge_user_access" value="2. GET /secure (302)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#DC2626;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="user_client" target="node_access">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 4. Access -> Worker (Validated JWT) -->
-        <mxCell id="edge_access_worker" value="3. Authenticated Session&#xa;(CF_Authorization JWT)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="cf_box" source="node_access" target="node_worker">
+        <!-- 3. Access -> Worker -->
+        <mxCell id="edge_access_worker" value="3. JWT Token" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#16A34A;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="cf_box" source="node_access" target="node_worker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 5. Worker -> R2 Binding -->
-        <mxCell id="edge_worker_r2" value="4. Native R2 Binding&#xa;get(&quot;US.svg&quot;)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F38020;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="cf_box" source="node_worker" target="node_r2">
+        <!-- 4. Worker -> R2 -->
+        <mxCell id="edge_worker_r2" value="4. Get Flag" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#F38020;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="cf_box" source="node_worker" target="node_r2">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 6. R2 -> Worker (SVG Stream) -->
-        <mxCell id="edge_r2_worker" value="SVG Response (200)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="cf_box" source="node_r2" target="node_worker">
+        <!-- R2 -> Worker -->
+        <mxCell id="edge_r2_worker" value="SVG Stream" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#16A34A;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="cf_box" source="node_r2" target="node_worker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 7. Worker -> Edge Tunnel Anchor -->
-        <mxCell id="edge_worker_tunnel" value="5. Relay /secure/headers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="cf_box" source="node_worker" target="node_edge_tunnel">
+        <!-- 5. Worker -> Tunnel Edge -->
+        <mxCell id="edge_worker_tunnel" value="5. /secure/headers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#2563EB;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="cf_box" source="node_worker" target="node_edge_tunnel">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 8. THE TUNNEL CONDUIT (Cloudflare -> cloudflared in AWS) -->
-        <mxCell id="edge_tunnel_conduit" value="PERSISTENT OUTBOUND-ONLY QUIC TUNNEL&#xa;(Zero Inbound Firewall Ports / Origin Cloaked)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284C7;strokeWidth=3.5;dashed=1;fontSize=11;fontStyle=1;fontColor=#0369A1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="node_edge_tunnel" target="node_cloudflared">
+        <!-- 6. TUNNEL CONDUIT -->
+        <mxCell id="edge_tunnel_conduit" value="Cloudflare Tunnel (Outbound QUIC)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#0284C7;strokeWidth=3;dashed=1;fontSize=11;fontStyle=1;fontColor=#0369A1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="node_edge_tunnel" target="node_cloudflared">
           <mxGeometry relative="1" as="geometry">
-            <Array points="800 541, 1000 541, 1000 335, 1120 335"/>
+            <Array points="600 500, 840 500, 840 310, 950 310"/>
           </mxGeometry>
         </mxCell>
 
-        <!-- 9. cloudflared -> ALB -->
-        <mxCell id="edge_tunnel_alb" value="Forward to Loopback/ALB" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="aws_box" source="node_cloudflared" target="node_alb">
+        <!-- 7. cloudflared -> ALB -->
+        <mxCell id="edge_tunnel_alb" value="Forward Loopback" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="aws_box" source="node_cloudflared" target="node_alb">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 10. ALB -> HTTP Echo -->
-        <mxCell id="edge_alb_echo" value="Echo Request Headers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="aws_box" source="node_alb" target="node_echo">
+        <!-- 8. ALB -> Echo -->
+        <mxCell id="edge_alb_echo" value="Echo Headers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="aws_box" source="node_alb" target="node_echo">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- 11. Attacker Direct Scan -> Dropped -->
-        <mxCell id="edge_attack_blocked" value="❌ Direct TCP Port Scan to AWS IP (443/80)&#xa;DROPPED BY SECURITY GROUP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=2;dashed=1;fontSize=10;fontStyle=1;fontColor=#991B1B;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="attacker_bot" target="node_secgroup">
+        <!-- Attacker -> Blocked -->
+        <mxCell id="edge_attack_blocked" value="❌ Port Scan (Dropped)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#DC2626;strokeWidth=2;dashed=1;fontSize=10;fontStyle=1;fontColor=#991B1B;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="attacker_bot" target="node_secgroup">
           <mxGeometry relative="1" as="geometry">
-            <Array points="200 622, 1040 622, 1040 135"/>
+            <Array points="160 550, 860 550, 860 140"/>
           </mxGeometry>
         </mxCell>
 
