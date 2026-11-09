@@ -48,8 +48,21 @@ export default {
       // Edge Cache Miss: Retrieve directly from private R2 bucket
       let object = await env.FLAGS_BUCKET.get(r2Key);
       if (!object) {
-        // Fallback to default asset within the same release
+        // Fallback 1: Root country file (e.g. US.svg)
+        object = await env.FLAGS_BUCKET.get(filename);
+      }
+      if (!object) {
+        // Fallback 2: Hyphenated key pattern (e.g. US-build-20261106-1925.svg)
+        const countryCode = filename.replace(/\.svg$/i, "");
+        object = await env.FLAGS_BUCKET.get(`${countryCode}-${requestedBuild}.svg`);
+      }
+      if (!object) {
+        // Fallback 3: Release-level default asset
         object = await env.FLAGS_BUCKET.get(`${requestedBuild}/default.svg`);
+      }
+      if (!object) {
+        // Fallback 4: Global root default asset
+        object = await env.FLAGS_BUCKET.get("default.svg");
       }
 
       if (!object) {
